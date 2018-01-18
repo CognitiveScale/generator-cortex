@@ -41,11 +41,25 @@ module.exports = class extends Generator {
         message : 'Implementation language',
         choices : displayStrings(languages),
         default : 0
+      }, {
+        type    : 'input',
+        name    : 'inputType',
+        message : 'Input type',
+        default : 'cortex/Text'
+      }, {
+        type    : 'input',
+        name    : 'outputType',
+        message : 'Output type',
+        default : 'cortex/Text'
       }]).then((answers) => {
-        this.options.projectName = this.config.get('projectName');
-        this.options.skillName = answers.skillName;
-        this.options.technology = answers.technology;
-        this.options.language = answers.language;
+        this.options.projectName   = this.config.get('projectName');
+        this.options.projectPrefix = this.config.get('projectPrefix');
+        this.options.skillName     = answers.skillName;
+        this.options.functionName  = answers.skillName;
+        this.options.technology    = answers.technology;
+        this.options.language      = answers.language;
+        this.options.inputType     = answers.inputType.trim();
+        this.options.outputType    = answers.outputType.trim();
       });
     }
 
@@ -53,7 +67,7 @@ module.exports = class extends Generator {
         const techName = lookupNameByDisplay(technologies, this.options.technology);
         const langName = lookupNameByDisplay(languages,    this.options.language);
 
-        const funcName = this.options.skillName
+        const funcName = this.options.functionName
         const funcTemplate = techName + '/' + langName + '/**/*'
         const funcDir = this.destinationPath('functions/' + funcName)
         this.log('Creating', langName, 'function', funcName, 'in', funcDir)
