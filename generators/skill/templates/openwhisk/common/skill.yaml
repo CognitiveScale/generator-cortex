@@ -1,0 +1,16 @@
+name: cba/<%= skillName %>
+title: <%= projectName %> <%= skillName %> Skill
+description: Update this description -- <%= projectName %> <%= skillName %>
+inputs:
+  -
+    name: input1
+    typeName: <%= inputType %>
+    routing:
+      all:
+        functionID: cba/<%= functionName %>
+        output: output1
+
+outputs:
+  -
+    name: output1
+    typeName: <%= outputType %>
