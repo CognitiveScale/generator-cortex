@@ -2,8 +2,10 @@
  - [x] Setup documentation
  - [x] Openwhisk + Python2 backed skill
  - [ ] Openwhisk + Python3 backed skill
- - [ ] Openwhisk + Node backed skill
+ - [x] Openwhisk + Node backed skill
  - [ ] Long running job backed skill
  - [ ] Datatypes
  - [ ] Datasets
  - [ ] Dataset sampling in unit testing
+ - [ ] Sample code matches input, output types
+ - [ ] __main__.py, index.js, etc renamed to incorporate function name

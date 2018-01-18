@@ -7,7 +7,7 @@ inputs:
     typeName: <%= inputType %>
     routing:
       all:
-        functionID: cba/<%= functionName %>
+        functionID: cortex/<%= projectPrefix %>_<%= functionName %>
         output: output1
 
 outputs:

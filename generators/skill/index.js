@@ -6,7 +6,7 @@ const technologies = [
 
 const languages = [
     { 'display': 'Python 2', 'name': 'python2' },
-    { 'display': 'Python 3', 'name': 'python3' }
+    { 'display': 'Node 8', 'name': 'node8' }
 ]
 
 function displayStrings(table) {
