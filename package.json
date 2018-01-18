@@ -1,0 +1,22 @@
+{
+  "name": "generator-cortex",
+  "version": "0.1.0",
+  "description": "Generates a development project for Cortex constructs like type and skills",
+  "license": "UNLICENSED",
+  "private": true,
+  "contributors":
+    [ { "name": "Dilum Ranatunga" }
+    ],
+  "files":
+    [ "generators"
+    ],
+  "keywords":
+    [ "yeoman-generator"
+    , "cortex"
+    , "skills"
+    , "CognitiveScale"
+    ],
+  "dependencies": {
+    "yeoman-generator": "^1.1.1"
+  }
+}
