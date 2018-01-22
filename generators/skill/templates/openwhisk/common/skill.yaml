@@ -1,4 +1,4 @@
-name: cba/<%= skillName %>
+name: <%= projectPrefix %>/<%= skillName %>
 title: <%= projectName %> <%= skillName %> Skill
 description: Update this description -- <%= projectName %> <%= skillName %>
 inputs:
