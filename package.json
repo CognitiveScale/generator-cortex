@@ -4,6 +4,9 @@
   "description": "Generates a development project for Cortex constructs like type and skills",
   "license": "UNLICENSED",
   "private": false,
+  "publishConfig": {
+    "registry": "https://cognitivescale.jfrog.io/cognitivescale/api/npm/npm-local"
+  },
   "contributors": [
     {
       "name": "Dilum Ranatunga"
