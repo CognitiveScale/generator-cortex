@@ -1,0 +1,18 @@
+image: node:boron
+
+pipelines:
+  default:
+      - step:
+          script:
+            - npm install
+            - npm test
+
+  branches:
+    master:
+      - step:
+          script:
+            - npm install
+            - npm test
+            - npm run build
+            - printf "//cognitivescale.jfrog.io/cognitivescale/api/npm/:_authToken=${NPM_TOKEN}\nregistry=https://cognitivescale.jfrog.io/cognitivescale/api/npm/npm-repo" >> ~/.npmrc
+            - npm publish
