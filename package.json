@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Generates a development project for Cortex constructs like type and skills",
   "license": "UNLICENSED",
-  "private": true,
+  "private": false,
   "contributors": [
     {
       "name": "Dilum Ranatunga"
