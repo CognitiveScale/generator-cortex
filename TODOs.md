@@ -9,4 +9,4 @@
  - [ ] Dataset sampling in unit testing
  - [ ] Sample code matches input, output types
  - [ ] __main__.py, index.js, etc renamed to incorporate function name
- - [ ] Scaffolding for unit testing the generators
+ - [x] Scaffolding for unit testing the generators
