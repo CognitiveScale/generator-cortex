@@ -1,6 +1,6 @@
 {
   "name": "generator-cortex",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Generates a development project for Cortex constructs like type and skills",
   "license": "UNLICENSED",
   "private": false,
