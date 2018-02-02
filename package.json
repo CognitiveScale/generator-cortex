@@ -12,6 +12,7 @@
       "name": "Dilum Ranatunga"
     }
   ],
+  "main": "generators/app/index.js",
   "files": [
     "generators"
   ],
