@@ -2,10 +2,8 @@
 
 ## Developer Setup
 
-  1. Install Bluemix CLI
-  2. Install Cloud-Functions plugin for Bluemix
-  3. Install Cortex CLI
-  4. Install Yeoman Cortex Generator
+  1. Install Cortex CLI
+  2. Install Yeoman Cortex Generator
 
 ## Adding a Skill
 

@@ -1,57 +1,12 @@
-# Once Per Machine Setup
-
-## Set Up a Bluemix Account
-
-1. Create a Bluemix account on https://console.bluemix.net
-    1. Use your @cognitivescale.com email address
-2. Ask the Cortex team to give you access to:
-    * Account: **Cognitive Scale**  *(note the space)*
-    * Region: **US South**
-    * Cloud Foundry Org: **CognitiveScale**  *(note no space)*
-    * Cloud Foundry Space: **cortex-cognitive-skills-dev**
-
-→ Consider setting up your Bluemix CLI while you wait for necessary authorization
-
-## Install the Bluemix CLI
-
-1. Log into Bluemix console
-2. Download the CLI: https://console.bluemix.net/openwhisk/learn/cli
-3. Install the cloud functions plugin:   
-```  
-  % bx plugin install Cloud-Functions -r Bluemix  
-```
-4. (You need to wait for authorization now)
-5. Log into the appropriate region and account:  
-```    
-    % bx login -a api.ng.bluemix.net -o CognitiveScale -s cortex-cognitive-skills-dev
-    % bx target -c 8181f93cf3b742dbd2ab762ed301af3b
-```  
-
-### Sniff Test Against the Echo Function
-
-```
-% bx wsk action invoke /CognitiveScale_cortex-cognitive-skills-dev/cortex/echo_processor -i -r
-```
-
-Should return something like:
-
-```  
-  {
-    "payload": {
-        "error": "No key \"text\" found. Got: <type 'dict'>"
-    }
-  }
-```
-
 ## Install the Cortex CLI
 
 1. The CLI is currently distributed as source. Get the source:
 
     ```
-    % git clone git@bitbucket.org:cognitivescale/cortex-cli.git
+    % npm install @c12e/cortex-cli
     ```
 
-2. Follow the repo's [README.md](https://bitbucket.org/cognitivescale/cortex-cli)
+2. Follow the repo's [README.md](https://github.com/CognitiveScale/cortex-cli)
 
 ## Install the Yeoman Generator for Cortex
 
@@ -76,10 +31,10 @@ Should return something like:
 * Current proposal is to prefix all cloud functions (lambdas) with a short project name (e.g. 'cba').
 * Choose a such a name, and consider using the same for account name in tenant setup below.
 
-## Create Tenant on Cortex
+## Create Account on Cortex Cloud
 
 1. Ask for an invitation code from cortex development team. (You will use this during registration)
-2. Create a tenant on cortex dev install: https://console.cortex-dev.insights.ai/
+2. Create an account on Cortex: https://console.cortex.insights.ai/
 2. Register link
 3. Fill in form and register
     * Use the invitation code
@@ -114,9 +69,9 @@ Should return something like:
 ```
 % cortex configure
 ```
-4. Use the development install URL (https://api.cortex-dev.insights.ai)
+4. Use the API URL (https://api.cortex.insights.ai)
 5. Use the developer credentials you created [above](#set-up-a-developer-account-for-tenant)
 6. Perform a quick check to make sure your configuration and credentials are correct:  
 ```
-% cortex types describe cortex/Text  
+% cortex agents list 
 ```

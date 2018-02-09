@@ -1,17 +1,18 @@
 {
   "name": "generator-cortex",
   "version": "0.1.1",
-  "description": "Generates a development project for Cortex constructs like type and skills",
-  "license": "UNLICENSED",
+  "description": "Generates a development project for Cortex constructs like functions and skills",
+  "license": "Apache 2.0",
   "private": false,
   "publishConfig": {
-    "registry": "https://cognitivescale.jfrog.io/cognitivescale/api/npm/npm-local"
+    "public": true
   },
-  "contributors": [
-    {
-      "name": "Dilum Ranatunga"
-    }
-  ],
+  "author": "CognitiveScale",
+  "homepage": "https://github.com/CognitiveScale/generator-cortex",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CognitiveScale/generator-cortex.git"
+  },
   "main": "generators/app/index.js",
   "files": [
     "generators"
