@@ -1,4 +1,4 @@
-image: node:boron
+image: node:carbon
 
 pipelines:
   default:
@@ -6,12 +6,3 @@ pipelines:
           script:
             - npm install
             - npm test
-
-  branches:
-    master:
-      - step:
-          script:
-            - npm install
-            - npm test
-            - printf "//cognitivescale.jfrog.io/cognitivescale/api/npm/:_authToken=${NPM_TOKEN}\nregistry=https://cognitivescale.jfrog.io/cognitivescale/api/npm/npm-repo" >> ~/.npmrc
-            - npm publish
