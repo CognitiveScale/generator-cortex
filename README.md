@@ -1,5 +1,7 @@
 # Yeoman Generator for Cortex Projects
 
+[![Build Status](https://secure.travis-ci.org/CognitiveScale/generator-cortex.svg)](http://travis-ci.org/CognitiveScale/generator-cortex)
+
 This is a Yeoman generator for setting up a project that groups a
 collection of Cortex skill definitions and the underlying implementation logic.
 
