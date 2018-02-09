@@ -1,8 +1,0 @@
-image: node:carbon
-
-pipelines:
-  default:
-      - step:
-          script:
-            - npm install
-            - npm test
