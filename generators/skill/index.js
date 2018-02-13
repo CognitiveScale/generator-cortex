@@ -17,10 +17,11 @@
 'use strict';
 
 const technologies = [
-    { 'display': 'Openwhisk Function', 'name': 'openwhisk' }
+    { 'display': 'Function', 'name': 'openwhisk' }
 ]
 
 const languages = [
+    { 'display': 'Python 3', 'name': 'python3' },
     { 'display': 'Python 2', 'name': 'python2' },
     { 'display': 'Node 8', 'name': 'node8' }
 ]
