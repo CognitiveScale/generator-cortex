@@ -1,0 +1,9 @@
+{
+    "properties": {
+        "lang":"it"
+    },
+    "payload": {
+        "text":"Jenna"
+    },
+    "typeName":"cortex/UserItemRating"
+}

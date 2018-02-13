@@ -1,2 +1,5 @@
 functions/*/node_modules
-functions/*/target
+functions/*/build
+*.zip
+venv/
+*.pyc

@@ -17,7 +17,7 @@
 'use strict';
 
 const technologies = [
-    { 'display': 'Function', 'name': 'openwhisk' }
+    { 'display': 'Function', 'name': 'function' }
 ]
 
 const languages = [
