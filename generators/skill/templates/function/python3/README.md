@@ -32,3 +32,5 @@ These wrapper scripts are available to assist in deploying your function:
 * `build.sh` will package the function in build/function.zip
 * `deploy.sh` will build and deploy the function via Cortex's function apis
 * `test.sh` will invoke the deployed function via Cortex's function api
+
+For more information: https://docs.cortex.insights.ai
