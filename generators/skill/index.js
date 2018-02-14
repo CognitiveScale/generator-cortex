@@ -84,16 +84,15 @@ module.exports = class extends Generator {
         const techName = lookupNameByDisplay(technologies, this.options.technology);
         const langName = lookupNameByDisplay(languages,    this.options.language);
 
-        const funcName = this.options.functionName
-        const funcTemplate = techName + '/' + langName + '/**/*'
-        const funcDir = this.destinationPath('functions/' + funcName)
-        this.log('Creating', langName, 'function', funcName, 'in', funcDir)
-        this.fs.copyTpl( this.templatePath(funcTemplate), funcDir, this.options)
+        const funcName = this.options.functionName;
+        const funcTemplate = techName + '/' + langName + '/**/*';
 
-        const skillName = this.options.skillName
-        const skillTemplate = techName + '/' + 'common' + '/**/*'
-        const skillDir = this.destinationPath('skills/' + skillName)
-        this.log('Creating skill', skillName, 'in', skillDir)
-        this.fs.copyTpl( this.templatePath(skillTemplate), skillDir, this.options)
+        const skillName = this.options.skillName;
+        const skillTemplate = techName + '/' + 'common' + '/**/*';
+        const skillDir = this.destinationPath('skills/' + skillName);
+        this.log('Creating', langName, 'function', funcName, 'in', skillDir);
+        this.fs.copyTpl( this.templatePath(funcTemplate), skillDir, this.options);
+        this.log('Creating skill', skillName, 'in', skillDir);
+        this.fs.copyTpl( this.templatePath(skillTemplate), skillDir, this.options);
     }
 };
