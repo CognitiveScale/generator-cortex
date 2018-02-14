@@ -17,10 +17,11 @@
 'use strict';
 
 const technologies = [
-    { 'display': 'Openwhisk Function', 'name': 'openwhisk' }
+    { 'display': 'Function', 'name': 'function' }
 ]
 
 const languages = [
+    { 'display': 'Python 3', 'name': 'python3' },
     { 'display': 'Python 2', 'name': 'python2' },
     { 'display': 'Node 8', 'name': 'node8' }
 ]
@@ -83,16 +84,15 @@ module.exports = class extends Generator {
         const techName = lookupNameByDisplay(technologies, this.options.technology);
         const langName = lookupNameByDisplay(languages,    this.options.language);
 
-        const funcName = this.options.functionName
-        const funcTemplate = techName + '/' + langName + '/**/*'
-        const funcDir = this.destinationPath('functions/' + funcName)
-        this.log('Creating', langName, 'function', funcName, 'in', funcDir)
-        this.fs.copyTpl( this.templatePath(funcTemplate), funcDir, this.options)
+        const funcName = this.options.functionName;
+        const funcTemplate = techName + '/' + langName + '/**/*';
 
-        const skillName = this.options.skillName
-        const skillTemplate = techName + '/' + 'common' + '/**/*'
-        const skillDir = this.destinationPath('skills/' + skillName)
-        this.log('Creating skill', skillName, 'in', skillDir)
-        this.fs.copyTpl( this.templatePath(skillTemplate), skillDir, this.options)
+        const skillName = this.options.skillName;
+        const skillTemplate = techName + '/' + 'common' + '/**/*';
+        const skillDir = this.destinationPath('skills/' + skillName);
+        this.log('Creating', langName, 'function', funcName, 'in', skillDir);
+        this.fs.copyTpl( this.templatePath(funcTemplate), skillDir, this.options);
+        this.log('Creating skill', skillName, 'in', skillDir);
+        this.fs.copyTpl( this.templatePath(skillTemplate), skillDir, this.options);
     }
 };

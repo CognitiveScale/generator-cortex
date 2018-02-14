@@ -25,6 +25,6 @@ beforeEach(function() {
 
 describe('cortex:app', function() {
   it('generates a root makefile', function() {
-      assert.file('Makefile');
+      assert.file('README.md');
   });
 });
