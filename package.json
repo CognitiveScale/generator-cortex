@@ -1,6 +1,6 @@
 {
   "name": "@c12e/generator-cortex",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Generates a development project for Cortex constructs like functions and skills",
   "license": "Apache-2.0",
   "private": false,
@@ -21,6 +21,7 @@
     "yeoman-generator",
     "cortex",
     "skills",
+    "connections",
     "CognitiveScale"
   ],
   "dependencies": {

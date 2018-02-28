@@ -1,0 +1,8 @@
+name: <%= projectPrefix %>/<%= connName %>
+title: <%= projectName %> <%= connName %> Connection
+description: Update this description
+connectionType: <%= connType %>
+allowWrite: true
+params:
+  - name: mongoUri
+    value: <%= uri %>
