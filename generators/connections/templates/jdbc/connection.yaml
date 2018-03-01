@@ -20,3 +20,5 @@ params:
     value: --Insert jar--
   - name: "servicePrincipal"
     value: ""
+  - name: "query"
+    value: --Insert SQL Query--

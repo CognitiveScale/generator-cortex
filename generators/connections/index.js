@@ -17,8 +17,8 @@
 
 const connTypes = [
     { 'display': 'MongoDB', 'name': 'mongo' },
-    { 'display': 'Managed Content Storage', 'name': 'managedContent' },
-    { 'display': 'Postgres SQL', 'name': 'postgresql' },  // TODO: will need to update in connType boostrap
+    { 'display': 'S3 Connection', 'name': 's3' },
+    { 'display': 'Postgres SQL', 'name': 'postgresql' },
     { 'display': 'Microsoft SQL Server', 'name': 'mssql' },
     { 'display': 'MySQL', 'name': 'mysql' },
     { 'display': 'Hive', 'name': 'hive' } // Fix me dont have one for hive yet

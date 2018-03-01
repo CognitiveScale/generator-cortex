@@ -5,16 +5,17 @@ connectionType: <%= connType %>
 allowWrite: true
 tags:
   - label: category.connection.type
-    value: NoSQL
+    value: Files
   - label: category.connection.type
-    value: Document Store
+    value: Cloud Storage
 params:
-  - name: mongoUri
+  - name: bucket
+    value: --Insert Bucket Name--
+  - name: region
+    value: --Insert Region--
+  - name: publicKey
+    value: --Insert Public Key--
+  - name: secretKey
+    value: --Insert Secret Access Key--
+  - name: s3Endpoint
     value: <%= uri %>
-  - name: collection
-    value: --Insert Collection Name--
-  - name: filter
-    value: "{}"
-  - name: filter
-    value: "{}"
-
