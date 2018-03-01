@@ -1,0 +1,22 @@
+name: <%= projectPrefix %>/<%= connName %>
+title: <%= projectName %> <%= connName %> Connection
+description: Update this description
+connectionType: <%= connName %>
+allowWrite: true
+params:
+  - name: uri
+    value: <%= uri %>
+  - name: "username"
+    value: --Insert Username--
+  - name: "password"
+    value: --Insert Password--
+  - name: "classname"
+    value: <%= classname %>
+  - name: "kerberosEnabled"
+    value: "False"
+  - name: "keytab"
+    value: ""
+  - name: "managed_content_key"
+    value: --Insert jar--
+  - name: "servicePrincipal"
+    value: ""

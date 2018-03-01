@@ -18,11 +18,13 @@
 const connTypes = [
     { 'display': 'MongoDB', 'name': 'mongo' },
     { 'display': 'Managed Content Storage', 'name': 'managedContent' },
-    { 'display': 'Postgres SQL', 'name': 'jdbc' },
-    { 'display': 'Microsoft SQL Server', 'name': 'jdbc' },
-    { 'display': 'MySQL', 'name': 'jdbc' },
-    { 'display': 'Hive', 'name': 'jdbc' }
+    { 'display': 'Postgres SQL', 'name': 'postgresql' },  // TODO: will need to update in connType boostrap
+    { 'display': 'Microsoft SQL Server', 'name': 'mssql' },
+    { 'display': 'MySQL', 'name': 'mysql' },
+    { 'display': 'Hive', 'name': 'hive' } // Fix me dont have one for hive yet
 ];
+
+const isJdbc = ['postgresql', 'mssql', 'mysql', 'hive'];
 
 function displayStrings(table) {
     return table.reduce(function(acc, entry) {
@@ -75,8 +77,17 @@ module.exports = class extends Generator {
     writing() {
         const connName = lookupNameByDisplay(connTypes, this.options.connType);
 
+        let templateName = connName;
+
+        if (isJdbc.includes(connName)) {
+            this.options.classname = `org.${connName}.Driver`;
+            templateName = 'jdbc';
+        }
+
+        // TODO before we create yml check conneciton endpoint for name uniqueness.
+
         const commonPath = 'common/**/*';
-        const connTemplate = connName + '/**/*';
+        const connTemplate = templateName + '/**/*';
         const connDir = this.destinationPath('connections/' + connName);
         this.log('Creating connection', connName, 'in', connDir);
         this.fs.copyTpl( this.templatePath(commonPath), connDir, {});
