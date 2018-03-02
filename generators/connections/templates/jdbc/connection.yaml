@@ -1,7 +1,7 @@
-name: <%= projectPrefix %>/<%= connName %>
-title: <%= projectName %> <%= connName %> Connection
+name: <%= connName %>
+title: <%= connTitle %>
 description: Update this description
-connectionType: <%= connName %>
+connectionType: <%= connTypeShort %>
 allowWrite: true
 params:
   - name: uri

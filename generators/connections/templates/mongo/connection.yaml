@@ -1,7 +1,7 @@
-name: <%= projectPrefix %>/<%= connName %>
-title: <%= projectName %> <%= connName %> Connection
+name: <%= connName %>
+title: <%= connTitle %>
 description: Update this description
-connectionType: <%= connType %>
+connectionType: <%= connTypeShort %>
 allowWrite: true
 tags:
   - label: category.connection.type
@@ -13,8 +13,6 @@ params:
     value: <%= uri %>
   - name: collection
     value: --Insert Collection Name--
-  - name: filter
-    value: "{}"
   - name: filter
     value: "{}"
 

@@ -57,7 +57,7 @@ module.exports = class extends Generator {
       },
       {
         type    : 'input',
-        name    : 'title',
+        name    : 'connTitle',
         message : 'Title'
       },
       {
@@ -69,18 +69,19 @@ module.exports = class extends Generator {
         this.options.projectPrefix = this.config.get('projectPrefix');
         this.options.connType      = answers.connType;
         this.options.connName      = answers.connName;
-        this.options.title         = answers.title.trim();
+        this.options.connTitle     = answers.connTitle.trim();
         this.options.uri           = answers.uri;
       });
     }
 
     writing() {
-        const connName = lookupNameByDisplay(connTypes, this.options.connType);
+        const connTypeShort = lookupNameByDisplay(connTypes, this.options.connType);
 
-        let templateName = connName;
+        let templateName = connTypeShort;
+        this.options.connTypeShort = connTypeShort;
 
-        if (isJdbc.includes(connName)) {
-            this.options.classname = `org.${connName}.Driver`;
+        if (isJdbc.includes(connTypeShort)) {
+            this.options.classname = `org.${connTypeShort}.Driver`;
             templateName = 'jdbc';
         }
 
@@ -88,8 +89,8 @@ module.exports = class extends Generator {
 
         const commonPath = 'common/**/*';
         const connTemplate = templateName + '/**/*';
-        const connDir = this.destinationPath('connections/' + connName);
-        this.log('Creating connection', connName, 'in', connDir);
+        const connDir = this.destinationPath('connections/' + connTypeShort);
+        this.log('Creating connection', connTypeShort, 'in', connDir);
         this.fs.copyTpl( this.templatePath(commonPath), connDir, {});
         this.fs.copyTpl( this.templatePath(connTemplate), connDir, this.options);
     }
