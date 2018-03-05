@@ -17,7 +17,9 @@ params:
   - name: "keytab"
     value: ""
   - name: "managed_content_key"
-    value: --Insert jar--
+    value: --Insert key name--
+  - name: "jdbc_jar_file"
+    value: --Insert jar file path--
   - name: "servicePrincipal"
     value: ""
   - name: "query"
