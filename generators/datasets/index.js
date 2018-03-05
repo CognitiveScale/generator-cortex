@@ -82,7 +82,7 @@ module.exports = class extends Generator {
                   type    : 'list',
                   name    : 'typeName',
                   message : 'Type Name',
-                  choices : this.catalogTypes
+                  choices : this.catalogTypes.sort()
                 }]).then((answers) => {
                   this.options.projectName    = this.config.get('projectName');
                   this.options.projectPrefix  = this.config.get('projectPrefix');
@@ -102,8 +102,13 @@ module.exports = class extends Generator {
           const connDetails = 'connectionQuery:\n  - name: query\n    value: --Insert SQL query--\n';
           this.options.connDetails = connDetails;
 
+          const connTypes = this.connNameTypePair.find((item) => {
+              return item.name === this.options.connectionName;
+          });
+          const connType = connTypes.connType;
+
           const regex = /mongo/i;
-          const match = regex.exec(this.options.connectionName);
+          const match = regex.exec(connType);
           if (match) {
               const connDetails = 'connectionQuery:\n  - name: collection\n    value: --Insert Collection name--\n';
               const connDetailsMongo = '  - name: filter\n    value: --Insert Collection filter {}--\n';
@@ -111,8 +116,8 @@ module.exports = class extends Generator {
           }
 
           const commonPath = 'common/**/*';
-        const connDir = this.destinationPath('dataset/' + this.options.datasetName);
-        this.log('Creating connection', this.options.datasetName, 'in', connDir);
-        this.fs.copyTpl( this.templatePath(commonPath), connDir, this.options);
+          const connDir = this.destinationPath('dataset/' + this.options.datasetName);
+          this.log('Creating connection', this.options.datasetName, 'in', connDir);
+          this.fs.copyTpl( this.templatePath(commonPath), connDir, this.options);
     }
 };
