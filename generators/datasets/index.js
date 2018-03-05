@@ -15,11 +15,20 @@
  */
 
 
+const Connections = require("../client/connections");
 const Generator = require('yeoman-generator');
 
 module.exports = class extends Generator {
 
     prompting() {
+      const options = this.options.cortexOptions;
+      console.log(`options: ${options}`);
+      const profileName = options.profile || 'default';
+      const conn = new Connections(options.url);
+      const listOfConns = conn.listConnections(options.token);
+
+      console.log(`conns: ${JSON.stringify(listOfConns)}`);
+
       return this.prompt([
       {
         type    : 'input',
@@ -57,7 +66,6 @@ module.exports = class extends Generator {
     }
 
     writing() {
-
         // TODO before we create yml check dataset endpoint for name uniqueness.
 
         const connDetails = 'connectionQuery:\n  - name: query\n    value: --Insert SQL query--\n';
