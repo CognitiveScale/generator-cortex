@@ -75,7 +75,7 @@ module.exports = class extends Generator {
                 {
                   type    : 'list',
                   name    : 'connectionName',
-                  message : 'Connetion Name',
+                  message : 'Connection Name',
                   choices : this.displayNames()
                 },
                 {
