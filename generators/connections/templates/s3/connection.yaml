@@ -1,0 +1,21 @@
+name: <%= projectPrefix %>/<%= connName %>
+title: <%= projectName %> <%= connName %> Connection
+description: Update this description
+connectionType: <%= connType %>
+allowWrite: true
+tags:
+  - label: category.connection.type
+    value: Files
+  - label: category.connection.type
+    value: Cloud Storage
+params:
+  - name: bucket
+    value: --Insert Bucket Name--
+  - name: region
+    value: --Insert Region--
+  - name: publicKey
+    value: --Insert Public Key--
+  - name: secretKey
+    value: --Insert Secret Access Key--
+  - name: s3Endpoint
+    value: <%= uri %>

@@ -1,0 +1,18 @@
+name: <%= connName %>
+title: <%= connTitle %>
+description: Update this description
+connectionType: <%= connTypeShort %>
+allowWrite: true
+tags:
+  - label: category.connection.type
+    value: NoSQL
+  - label: category.connection.type
+    value: Document Store
+params:
+  - name: mongoUri
+    value: <%= uri %>
+  - name: collection
+    value: --Insert Collection Name--
+  - name: filter
+    value: "{}"
+
