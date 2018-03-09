@@ -1,0 +1,6 @@
+name: <%= projectPrefix %>/<%= datasetName %>
+title: <%= projectName %> <%= title %>
+description: <%= description %>
+typeName: <%= typeName %>
+connectionName: <%= connectionName %>
+<%= connDetails %>
