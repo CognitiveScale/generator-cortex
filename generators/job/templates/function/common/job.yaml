@@ -1,0 +1,8 @@
+name: <%= jobName %>
+image: <%= image %>
+command: <% if(commands.length > 0) { %> <% for (var i=0; i<commands.length; i++) { %>
+<%= "  - " + commands[i] %>%><% } %> <% } else { %>[]<% } %>
+memory: <%= memory %>
+vcpus: <%= vcpus %>
+environment: <% if(environment.length > 0) { %> <% for (var i=0; i<environment.length; i++) { %>
+<%= "  - " + environment[i] %>%><% } %> <% } else { %>[]<% } %>
