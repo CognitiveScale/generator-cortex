@@ -1,7 +1,7 @@
 name: <%= projectPrefix %>/<%= connName %>
 title: <%= projectName %> <%= connName %> Connection
 description: Update this description
-connectionType: <%= connType %>
+connectionType: <%= connTypeShort %>
 allowWrite: true
 tags:
   - label: category.connection.type
