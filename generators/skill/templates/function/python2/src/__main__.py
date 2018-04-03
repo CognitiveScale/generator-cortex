@@ -6,15 +6,12 @@ def main(req):
     try:
         result = main_impl(req['payload'])
     except KeyError as e:
-        result = {'error': 'Missing required key {0}'.format(e.args[0])}
+        result = {'error': 'Missing required key {0}'.format(e)}
     return {'payload': result}
 
 
 def main_impl(payload):
     # unpack all inputs first
-    if "text" in payload:
-        text = payload['text']
-    else:
-        text = "(silence)"
+    text = payload.get('text', "silence")
     # compute output
     return {'text': "Got message: " + text}
