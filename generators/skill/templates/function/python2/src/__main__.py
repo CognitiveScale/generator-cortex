@@ -12,9 +12,6 @@ def main(req):
 
 def main_impl(payload):
     # unpack all inputs first
-    if "text" in payload:
-        text = payload['text']
-    else:
-        text = "(silence)"
+    text = payload.get('text', "(silence)")
     # compute output
     return {'text': "Got message: " + text}
