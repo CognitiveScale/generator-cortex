@@ -41,7 +41,7 @@ const Generator = require('yeoman-generator');
 
 module.exports = class extends Generator {
 
-    _setProjectInfo() {
+    initializing() {
         this.options.projectName   = this.config.get('projectName');
         this.options.projectPrefix = this.config.get('projectPrefix');
     }
@@ -49,7 +49,6 @@ module.exports = class extends Generator {
     prompting() {
         // Use non-interactive mode if -i specified
         if (this.options.i) {
-            this._setProjectInfo();
             return
         }
 
@@ -80,7 +79,6 @@ module.exports = class extends Generator {
         message : 'Output type',
         default : 'cortex/Text'
       }]).then((answers) => {
-        this._setProjectInfo();
         this.options.skillName     = answers.skillName;
         this.options.functionName  = answers.skillName;
         this.options.technology    = answers.technology;
