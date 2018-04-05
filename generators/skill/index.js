@@ -26,6 +26,10 @@ const languages = [
     { 'display': 'Node 8', 'name': 'node8' }
 ]
 
+const options = [
+    'skillName', 'functionName', 'technology', 'language', 'inputType', 'outputType'
+];
+
 function displayStrings(table) {
     return table.reduce(function(acc, entry) {
         acc.push(entry.display)
@@ -41,7 +45,18 @@ const Generator = require('yeoman-generator');
 
 module.exports = class extends Generator {
 
+    _setProjectInfo() {
+        this.options.projectName   = this.config.get('projectName');
+        this.options.projectPrefix = this.config.get('projectPrefix');
+    }
+
     prompting() {
+        // Use non-interactive mode if -i specified
+        if (this.options.i) {
+            this._setProjectInfo();
+            return
+        }
+
       return this.prompt([{
         type    : 'input',
         name    : 'skillName',
@@ -69,8 +84,7 @@ module.exports = class extends Generator {
         message : 'Output type',
         default : 'cortex/Text'
       }]).then((answers) => {
-        this.options.projectName   = this.config.get('projectName');
-        this.options.projectPrefix = this.config.get('projectPrefix');
+        this._setProjectInfo();
         this.options.skillName     = answers.skillName;
         this.options.functionName  = answers.skillName;
         this.options.technology    = answers.technology;
