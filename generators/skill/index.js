@@ -26,10 +26,6 @@ const languages = [
     { 'display': 'Node 8', 'name': 'node8' }
 ]
 
-const options = [
-    'skillName', 'functionName', 'technology', 'language', 'inputType', 'outputType'
-];
-
 function displayStrings(table) {
     return table.reduce(function(acc, entry) {
         acc.push(entry.display)
