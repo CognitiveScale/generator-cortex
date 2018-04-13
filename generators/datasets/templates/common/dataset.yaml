@@ -1,6 +1,27 @@
+camel: 1.0.0
 name: <%= projectPrefix %>/<%= datasetName %>
 title: <%= projectName %> <%= title %>
 description: <%= description %>
-typeName: <%= typeName %>
-connectionName: <%= connectionName %>
-<%= connDetails %>
+fields:
+  - name: field1
+    type: <type>
+  - name: filed2
+    type: <type>
+connections:
+  default:
+    name: cortex/content
+    type: managedContent
+    query:
+      - name: key
+        value: <path/to/file.csv>
+      - name: contentType
+        value: CSV
+      - name: csv/delimiter
+        value: ','
+  environments: 
+    - environment: PROD
+      name: <%= connectionName %>
+      type: <%= connType %>
+      query:
+        - name: query
+          value: --Insert Query Here--
