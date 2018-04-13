@@ -78,6 +78,11 @@ module.exports = class extends Generator {
         name    : 'outputType',
         message : 'Output type',
         default : 'cortex/Text'
+      }, {
+        type    : 'bool',
+        name    : 'required',
+        message : 'Required',
+        default : false
       }]).then((answers) => {
         this.options.skillName     = answers.skillName;
         this.options.functionName  = answers.skillName;
@@ -85,6 +90,7 @@ module.exports = class extends Generator {
         this.options.language      = answers.language;
         this.options.inputType     = answers.inputType.trim();
         this.options.outputType    = answers.outputType.trim();
+        this.options.required      = answers.required;
       });
     }
 
