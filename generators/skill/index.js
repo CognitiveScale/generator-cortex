@@ -41,7 +41,17 @@ const Generator = require('yeoman-generator');
 
 module.exports = class extends Generator {
 
+    initializing() {
+        this.options.projectName   = this.config.get('projectName');
+        this.options.projectPrefix = this.config.get('projectPrefix');
+    }
+
     prompting() {
+        // Use non-interactive mode if -i specified
+        if (this.options.i) {
+            return
+        }
+
       return this.prompt([{
         type    : 'input',
         name    : 'skillName',
@@ -68,15 +78,19 @@ module.exports = class extends Generator {
         name    : 'outputType',
         message : 'Output type',
         default : 'cortex/Text'
+      }, {
+        type    : 'bool',
+        name    : 'required',
+        message : 'Required',
+        default : false
       }]).then((answers) => {
-        this.options.projectName   = this.config.get('projectName');
-        this.options.projectPrefix = this.config.get('projectPrefix');
         this.options.skillName     = answers.skillName;
         this.options.functionName  = answers.skillName;
         this.options.technology    = answers.technology;
         this.options.language      = answers.language;
         this.options.inputType     = answers.inputType.trim();
         this.options.outputType    = answers.outputType.trim();
+        this.options.required      = answers.required;
       });
     }
 
