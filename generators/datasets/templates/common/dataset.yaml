@@ -4,16 +4,16 @@ title: <%= projectName %> <%= title %>
 description: <%= description %>
 fields:
   - name: field1
-    type: <type>
+    type: string
   - name: filed2
-    type: <type>
+    type: string
 connections:
   default:
     name: cortex/content
     type: managedContent
     query:
       - name: key
-        value: <path/to/file.csv>
+        value: --Insert path/to/file.csv--
       - name: contentType
         value: CSV
       - name: csv/delimiter
@@ -22,6 +22,3 @@ connections:
     - environment: PROD
       name: <%= connectionName %>
       type: <%= connType %>
-      query:
-        - name: query
-          value: --Insert Query Here--

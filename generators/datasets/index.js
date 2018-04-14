@@ -93,24 +93,10 @@ module.exports = class extends Generator {
     }
 
       writing() {
-          // TODO before we create yml check dataset endpoint for name uniqueness.
-
-        //   const connDetails = 'connectionQuery:\n  - name: query\n    value: --Insert SQL query--\n';
-        //   this.options.connDetails = connDetails;
-
           const connTypes = this.connNameTypePair.find((item) => {
               return item.name === this.options.connectionName;
           });
-          const connType = connTypes.connType;
-          this.options.connType = conType;
-
-        //   const regex = /mongo/i;
-        //   const match = regex.exec(connType);
-        //   if (match) {
-        //       const connDetails = 'connectionQuery:\n  - name: collection\n    value: --Insert Collection name--\n';
-        //       const connDetailsMongo = '  - name: filter\n    value: --Insert Collection filter {}--\n';
-        //       this.options.connDetails = connDetails + connDetailsMongo;
-        //   }
+          this.options.connType = connTypes.connType;
 
           const commonPath = 'common/**/*';
           const connDir = this.destinationPath('dataset/' + this.options.datasetName);
