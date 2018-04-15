@@ -73,12 +73,6 @@ module.exports = class extends Generator {
                   name    : 'connectionName',
                   message : 'Connection Name',
                   choices : this.displayNames()
-                // },
-                // {
-                //   type    : 'list',
-                //   name    : 'typeName',
-                //   message : 'Type Name',
-                //   choices : this.catalogTypes.sort()
                 }]).then((answers) => {
                   this.options.projectName    = this.config.get('projectName');
                   this.options.projectPrefix  = this.config.get('projectPrefix');
@@ -86,7 +80,6 @@ module.exports = class extends Generator {
                   this.options.title          = answers.title.trim();
                   this.options.description    = answers.description.trim();
                   this.options.connectionName = answers.connectionName;
-                //   this.options.typeName       = answers.typeName;
                 });
 
         });
