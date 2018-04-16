@@ -7,9 +7,9 @@ inputs:
     title: input1
     parameters:
       - name: input1
-        type: <%= inputType %>
+        type: string
         description: Update this description
-        required: <%= required %>
+        required: true
     routing:
       all:
         action  : <%= projectPrefix %><%= functionName %>
@@ -21,6 +21,6 @@ outputs:
     title: output1
     parameters:
       - name: output1
-        type: <%= outputType %>
+        type: string
         description: Update this description
-        required: <%= required %>
+        required: true

@@ -71,20 +71,11 @@ module.exports = class extends Generator {
         message : 'Implementation language',
         choices : displayStrings(languages),
         default : 0
-      },
-      {
-        type    : 'bool',
-        name    : 'required',
-        message : 'Required',
-        default : false
       }]).then((answers) => {
         this.options.skillName     = answers.skillName;
         this.options.functionName  = answers.skillName;
         this.options.technology    = answers.technology;
         this.options.language      = answers.language;
-        this.options.inputType     = answers.inputType.trim();
-        this.options.outputType    = answers.outputType.trim();
-        this.options.required      = answers.required;
       });
     }
 
