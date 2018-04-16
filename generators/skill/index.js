@@ -43,7 +43,10 @@ module.exports = class extends Generator {
 
     initializing() {
         this.options.projectName   = this.config.get('projectName');
-        this.options.projectPrefix = this.config.get('projectPrefix');
+        if(this.config.get('projectPrefix'))
+            this.options.projectPrefix = this.config.get('projectPrefix') + '/';
+        else
+            this.options.projectPrefix = '';
     }
 
     prompting() {
@@ -68,17 +71,8 @@ module.exports = class extends Generator {
         message : 'Implementation language',
         choices : displayStrings(languages),
         default : 0
-      }, {
-        type    : 'input',
-        name    : 'inputType',
-        message : 'Input type',
-        default : 'cortex/Text'
-      }, {
-        type    : 'input',
-        name    : 'outputType',
-        message : 'Output type',
-        default : 'cortex/Text'
-      }, {
+      },
+      {
         type    : 'bool',
         name    : 'required',
         message : 'Required',
