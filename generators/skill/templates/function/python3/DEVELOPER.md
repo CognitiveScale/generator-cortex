@@ -1,5 +1,5 @@
 # Developing functions locally
-The `cortex-client` library can be installed locally to allow developers to locally develop/test their function before deploying to the cortex functions service.
+The `cortex-client` library can be installed locally to allow developers to locally develop/test their function before deploying to the cortex actions service.
 
 ## Pre-requisites
 * Python 3.6.x
