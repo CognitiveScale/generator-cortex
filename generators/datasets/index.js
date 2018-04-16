@@ -49,7 +49,11 @@ module.exports = class extends Generator {
             );
         });
 
-        const ops = [getConns];
+        const types = new Catalog(profile.url);
+        const getTypes = types.listTypes(profile.token).then((response) => {
+            this.catalogTypes = response.types.map(item => item.name);
+        });
+        const ops = [getConns, getTypes];
 
         return Promise.all(ops).then((response) => {
             return this.prompt([
@@ -73,6 +77,12 @@ module.exports = class extends Generator {
                   name    : 'connectionName',
                   message : 'Connection Name',
                   choices : this.displayNames()
+                },
+                {
+                  type    : 'list',
+                  name    : 'typeName',
+                  message : 'Type Name',
+                  choices : this.catalogTypes.sort()
                 }]).then((answers) => {
                   this.options.projectName    = this.config.get('projectName');
                   this.options.projectPrefix  = this.config.get('projectPrefix');
@@ -80,16 +90,30 @@ module.exports = class extends Generator {
                   this.options.title          = answers.title.trim();
                   this.options.description    = answers.description.trim();
                   this.options.connectionName = answers.connectionName;
+                  this.options.typeName       = answers.typeName;
                 });
 
         });
     }
 
       writing() {
+          // TODO before we create yml check dataset endpoint for name uniqueness.
+
+          const connDetails = 'connectionQuery:\n  - name: query\n    value: --Insert SQL query--\n';
+          this.options.connDetails = connDetails;
+
           const connTypes = this.connNameTypePair.find((item) => {
               return item.name === this.options.connectionName;
           });
-          this.options.connType = connTypes.connType;
+          const connType = connTypes.connType;
+
+          const regex = /mongo/i;
+          const match = regex.exec(connType);
+          if (match) {
+              const connDetails = 'connectionQuery:\n  - name: collection\n    value: --Insert Collection name--\n';
+              const connDetailsMongo = '  - name: filter\n    value: --Insert Collection filter {}--\n';
+              this.options.connDetails = connDetails + connDetailsMongo;
+          }
 
           const commonPath = 'common/**/*';
           const connDir = this.destinationPath('dataset/' + this.options.datasetName);
