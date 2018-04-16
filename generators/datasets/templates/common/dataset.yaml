@@ -1,6 +1,8 @@
+camel: 1.0.0
 name: <%= projectPrefix %>/<%= datasetName %>
 title: <%= projectName %> <%= title %>
 description: <%= description %>
-typeName: <%= typeName %>
+parameters: 
+  $ref: <%= typeName %>
 connectionName: <%= connectionName %>
 <%= connDetails %>
