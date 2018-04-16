@@ -1,5 +1,5 @@
 camel: 1.0.0
-name: <%= projectPrefix %>/<%= skillName %>
+name: <%= projectPrefix %><%= skillName %>
 title: <%= projectName %> <%= skillName %> Skill
 description: Update this description -- <%= projectName %> <%= skillName %>
 inputs:
@@ -12,7 +12,7 @@ inputs:
         required: <%= required %>
     routing:
       all:
-        action  : <%= projectPrefix %>/<%= functionName %>
+        action  : <%= projectPrefix %><%= functionName %>
         runtime: cortex/functions
         output: output1
 
