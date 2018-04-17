@@ -44,9 +44,9 @@ module.exports = class extends Generator {
     initializing() {
         this.options.projectName   = this.config.get('projectName');
         if(this.config.get('projectPrefix'))
-            this.options.projectPrefix = this.config.get('projectPrefix') + '/';
+            this.options.projectPrefix = this.config.get('projectPrefix');
         else
-            this.options.projectPrefix = '';
+            this.options.projectPrefix = 'default';
     }
 
     prompting() {
