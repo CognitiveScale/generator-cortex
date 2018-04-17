@@ -1,5 +1,5 @@
 camel: 1.0.0
-name: <%= projectPrefix %>/<%= datasetName %>
+name: <%= projectPrefix %><%= datasetName %>
 title: <%= projectName %> <%= title %>
 description: <%= description %>
 parameters: 

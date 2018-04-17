@@ -29,6 +29,14 @@ module.exports = class extends Generator {
         this.connNameTypePair;
         this.catalogTypes;
     }
+    
+    initializing() {
+        if(this.config.get('projectPrefix'))
+            this.options.projectPrefix = this.config.get('projectPrefix')+'/';
+        else
+            this.options.projectPrefix = 'default/';
+    }
+
 
     displayNames() {
        return  this.connNameTypePair.map(i => i.name);

@@ -1,4 +1,4 @@
-name: <%= projectPrefix %>/<%= connName %>
+name: <%= projectPrefix %><%= connName %>
 title: <%= projectName %> <%= connName %> Connection
 description: Update this description
 connectionType: <%= connTypeShort %>
