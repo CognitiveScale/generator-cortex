@@ -1,5 +1,5 @@
 {
-  "name": "<%= projectPrefix %>_<%= functionName %>",
+  "name": "_<%= functionName %>",
   "version": "0.1.0",
   "description": "Update this description -- <%= projectName %> <%= functionName %>",
   "license": "UNLICENSED",
