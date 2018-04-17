@@ -44,9 +44,9 @@ module.exports = class extends Generator {
     initializing() {
         this.options.projectName   = this.config.get('projectName');
         if(this.config.get('projectPrefix'))
-            this.options.projectPrefix = this.config.get('projectPrefix');
+            this.options.projectPrefix = this.config.get('projectPrefix')+'/';
         else
-            this.options.projectPrefix = 'default';
+            this.options.projectPrefix = 'default/';
     }
 
     prompting() {
@@ -58,7 +58,17 @@ module.exports = class extends Generator {
       return this.prompt([{
         type    : 'input',
         name    : 'skillName',
-        message : 'Skill name',
+        message : `Skill name: ${this.options.projectPrefix}`,
+        validate: (input)=> {
+            const regex = new RegExp('([^:.a-zA-Z0-9_-])');
+            const match = input.match(regex);
+            if (match) {
+                return `illegal charachter: ${match[1]}`;
+            }
+            else {
+                return true;
+            }
+        }
       }, {
         type    : 'list',
         name    : 'technology',

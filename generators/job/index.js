@@ -38,7 +38,14 @@ function trimAndFilterEmptyValues(values) {
 const Generator = require('yeoman-generator');
 
 module.exports = class extends Generator {
-
+    
+    initializing() {
+        if(this.config.get('projectPrefix'))
+            this.options.projectPrefix = this.config.get('projectPrefix')+'/';
+        else
+            this.options.projectPrefix = 'default/';
+    }
+    
     prompting() {
         return this.prompt([{
             type    : 'input',

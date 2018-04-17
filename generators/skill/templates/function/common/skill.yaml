@@ -6,7 +6,7 @@ inputs:
   - name: input1
     title: input1
     parameters:
-      - name: input1
+      - name: text
         type: string
         description: Update this description
         required: true
@@ -20,7 +20,7 @@ outputs:
   - name: output1
     title: output1
     parameters:
-      - name: output1
+      - name: text
         type: string
         description: Update this description
         required: true
