@@ -4,6 +4,5 @@
     },
     "payload": {
         "text":"Jenna"
-    },
-    "typeName":"cortex/UserItemRating"
+    }
 }
