@@ -4,10 +4,10 @@ description: Update this description
 connectionType: <%= connTypeShort %>
 allowWrite: true
 tags:
-  - label: category.connection.type
-    value: NoSQL
-  - label: category.connection.type
-    value: Document Store
+  - label: NoSQL
+    value: category.connection.type
+  - label: Document Store
+    value: category.connection.type
 params:
   - name: mongoUri
     value: <%= uri %>
