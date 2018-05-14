@@ -8,7 +8,7 @@ fi
 mkdir -p $SCRIPT_DIR/build/stage
 
 # copy source to a staging folder
-cp -r $SCRIPT_DIR/package.json $SCRIPT_DIR/src/ $SCRIPT_DIR/build/stage
+cp -r $SCRIPT_DIR/package.json $SCRIPT_DIR/src/index.js $SCRIPT_DIR/build/stage
 # Install node dependencies
 cd $SCRIPT_DIR/build/stage
 npm install --only=production
