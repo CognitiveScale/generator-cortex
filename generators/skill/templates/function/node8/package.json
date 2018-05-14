@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Update this description -- <%= projectName %> <%= functionName %>",
   "license": "UNLICENSED",
-  "main": "src/index.js",
+  "main": "./index.js",
   "dependencies" : {
     "left-pad" : "1.1.3"
   }
