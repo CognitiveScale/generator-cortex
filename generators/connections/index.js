@@ -20,11 +20,12 @@ const connTypes = [
     { 'display': 'S3 Connection', 'name': 's3' },
     { 'display': 'Postgres SQL', 'name': 'postgresql' },
     { 'display': 'Microsoft SQL Server', 'name': 'mssql' },
+    { 'display': 'Generic JDBC Connection', 'name': 'generic_jdbc' },
     { 'display': 'MySQL', 'name': 'mysql' },
     { 'display': 'Hive', 'name': 'hive' } // Fix me dont have one for hive yet
 ];
 
-const isJdbc = ['postgresql', 'mssql', 'mysql', 'hive'];
+const isJdbc = ['postgresql', 'mssql', 'mysql', 'hive', 'generic_jdbc'];
 
 function displayStrings(table) {
     return table.reduce(function(acc, entry) {
