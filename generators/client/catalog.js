@@ -19,7 +19,7 @@ const debug = require('debug')('cortex:cli');
 
 const createEndpoints = (baseUri) => {
     return {
-        types: `${baseUri}/v2/catalog/types`,
+        types: `${baseUri}/v3/catalog/types`,
     }
 };
 
