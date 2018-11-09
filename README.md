@@ -18,7 +18,10 @@ collection of Cortex skill definitions and the underlying implementation logic.
 ## User Setup
 
   1. Install Yeoman
+  ```npm install -g yo```
+  
   2. Install the Cortex generator for Yeoman
+    ```npm install -g generator-cortex```
 
 ## User Process
 
@@ -37,3 +40,15 @@ These steps are detailed in the [setup guide](SETUP.md)
 
   1. Install the Cortex CLI
   2. Install Yeoman
+
+## Developer setup
+Running locally
+```
+yo ./generator/app
+yo ./generator/datasets
+```
+
+Debugging 
+```
+node --inspect `which yo` <generator> [arguments]
+```
