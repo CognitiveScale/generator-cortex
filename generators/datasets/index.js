@@ -43,7 +43,7 @@ module.exports = class extends Generator {
     }
 
     prompting() {
-        const profileName = this.options.cortexProfile;
+        const profileName = this.options.cortexProfile || 'default';
         debug(`profileName: ${profileName}`);
         const config = Config.readConfig();
         debug('configuring profile: %s', profileName);
