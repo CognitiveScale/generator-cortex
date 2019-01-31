@@ -1,0 +1,12 @@
+name: <%= connName %>
+title: <%= connTitle %>
+description: Update this description
+connectionType: <%= connTypeShort %>
+allowWrite: true
+params:
+  - name: "plugin_jar"
+    value: <%= plugin_jar %>
+  - name: "jdbc_jar_file"
+    value: --Insert jar file path--
+  - name: "plugin_properties"
+    value: --Insert plugin properties--
