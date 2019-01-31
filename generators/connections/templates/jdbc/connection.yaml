@@ -12,15 +12,9 @@ params:
     value: --Insert Password--
   - name: "classname"
     value: <%= classname %>
-  - name: "kerberosEnabled"
-    value: "False"
-  - name: "keytab"
-    value: ""
   - name: "managed_content_key"
     value: --Insert key name--
   - name: "jdbc_jar_file"
     value: --Insert jar file path--
-  - name: "servicePrincipal"
-    value: ""
   - name: "query"
     value: --Insert SQL Query--

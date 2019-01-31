@@ -20,8 +20,9 @@ const connTypes = [
     { 'display': 'S3 Connection', 'name': 's3' },
     { 'display': 'Postgres SQL', 'name': 'postgresql' },
     { 'display': 'Microsoft SQL Server', 'name': 'mssql' },
-    { 'display': 'Generic JDBC Connection', 'name': 'generic_jdbc' },
     { 'display': 'MySQL', 'name': 'mysql' },
+    { 'display': 'Generic JDBC Connection', 'name': 'generic_jdbc' },
+    { 'display': 'Advanced JDBC Connection', 'name': 'advanced_jdbc' },
     { 'display': 'Hive', 'name': 'hive' } // Fix me dont have one for hive yet
 ];
 
@@ -48,7 +49,7 @@ module.exports = class extends Generator {
         else
             this.options.projectPrefix = 'default/';
     }
-    
+
     prompting() {
       return this.prompt([
       {
@@ -69,9 +70,20 @@ module.exports = class extends Generator {
         message : 'Title'
       },
       {
+        when: function (response) {
+            return lookupNameByDisplay(connTypes, response.connType) !== 'advanced_jdbc';
+        },
         type    : 'input',
         name    : 'uri',
-        message : 'Connetion URI'
+        message : 'Connection URI'
+      },
+      {
+        when: function (response) {
+            return lookupNameByDisplay(connTypes, response.connType) === 'advanced_jdbc';
+        },
+        type    : 'input',
+        name    : 'plugin_jar',
+        message : 'Plugin Jar Managed Content Key'
       }]).then((answers) => {
         this.options.projectName   = this.config.get('projectName');
         this.options.projectPrefix = this.config.get('projectPrefix');
@@ -79,6 +91,7 @@ module.exports = class extends Generator {
         this.options.connName      = answers.connName;
         this.options.connTitle     = answers.connTitle.trim();
         this.options.uri           = answers.uri;
+        this.options.plugin_jar    = answers.plugin_jar;
       });
     }
 
