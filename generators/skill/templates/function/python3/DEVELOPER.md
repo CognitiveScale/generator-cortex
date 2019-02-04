@@ -23,5 +23,12 @@ source activate cortex-function
 
 Install Python dependencies:
 ```
-pip install -r requirements.txt
+pip install -r src/requirements.txt
+```
+
+## Unit tests
+
+Run unit tests:
+```
+python test/test.py
 ```

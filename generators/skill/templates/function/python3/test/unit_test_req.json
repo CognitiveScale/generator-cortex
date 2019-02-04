@@ -1,0 +1,13 @@
+{
+  "instanceId": "test_instance_id",
+  "sessionId": "test_session_id",
+  "channelId": "test_channel_id",
+  "apiEndpoint": "https://api.cortex.insights.ai",
+  "token": "test_token",
+  "properties": {
+    "lang": "it"
+  },
+  "payload": {
+    "text": "Jenna"
+  }
+}
