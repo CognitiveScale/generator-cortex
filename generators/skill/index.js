@@ -16,15 +16,17 @@
 
 'use strict';
 
+const path = require('path');
+
 const technologies = [
     { 'display': 'Function', 'name': 'function' }
-]
+];
 
 const languages = [
-    { 'display': 'Python 3', 'name': 'python3' },
-    { 'display': 'Python 2', 'name': 'python2' },
-    { 'display': 'Node 8', 'name': 'node8' }
-]
+    { 'display': 'Python 3', 'name': 'python3', 'deploymentType': 'python:3' },
+    { 'display': 'Python 2', 'name': 'python2', 'deploymentType': 'python:2'  },
+    { 'display': 'Node 8', 'name': 'node8', 'deploymentType': 'nodejs:8'  }
+];
 
 function displayStrings(table) {
     return table.reduce(function(acc, entry) {
@@ -33,8 +35,8 @@ function displayStrings(table) {
     }, [])
 }
 
-function lookupNameByDisplay(table, lookup) {
-    return table.filter(entry => entry.display == lookup)[0].name
+function lookupByDisplay(table, lookup) {
+    return table.filter(entry => entry.display === lookup)[0];
 }
 
 const Generator = require('yeoman-generator');
@@ -63,7 +65,7 @@ module.exports = class extends Generator {
             const regex = new RegExp('([^:.a-zA-Z0-9_-])');
             const match = input.match(regex);
             if (match) {
-                return `illegal charachter: ${match[1]}`;
+                return `illegal character: ${match[1]}`;
             }
             else {
                 return true;
@@ -90,18 +92,26 @@ module.exports = class extends Generator {
     }
 
     writing() {
-        const techName = lookupNameByDisplay(technologies, this.options.technology);
-        const langName = lookupNameByDisplay(languages,    this.options.language);
+        const techName = lookupByDisplay(technologies, this.options.technology).name;
+        const langName = lookupByDisplay(languages,    this.options.language).name;
+
+        this.options.deploymentType = lookupByDisplay(languages, this.options.language).deploymentType;
 
         const funcName = this.options.functionName;
-        const funcTemplate = techName + '/' + langName + '/**/*';
+        const funcTemplate = path.join(techName,'template', langName, '**', '*');
 
         const skillName = this.options.skillName;
-        const skillTemplate = techName + '/' + 'common' + '/**/*';
-        const skillDir = this.destinationPath('skills/' + skillName);
+        const skillTemplate = path.join(techName,'template', 'common', '**', '*');
+        const skillDir = this.destinationPath(path.join('skills', skillName));
+
         this.log('Creating', langName, 'function', funcName, 'in', skillDir);
         this.fs.copyTpl( this.templatePath(funcTemplate), skillDir, this.options);
+
         this.log('Creating skill', skillName, 'in', skillDir);
         this.fs.copyTpl( this.templatePath(skillTemplate), skillDir, this.options);
+
+        const scriptTemplate = path.join(techName, 'scripts', process.platform, '**', '*');
+        this.log('Creating scripts for', skillName, 'in', skillDir);
+        this.fs.copyTpl( this.templatePath(scriptTemplate), skillDir, this.options);
     }
 };
