@@ -28,8 +28,6 @@ module.exports = class extends Generator {
 
     constructor(args, opts) {
         super(args, opts);
-        // this.connNameTypePair;
-        // this.catalogTypes;
     }
 
     initializing() {
