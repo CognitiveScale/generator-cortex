@@ -110,8 +110,13 @@ module.exports = class extends Generator {
         this.log('Creating skill', skillName, 'in', skillDir);
         this.fs.copyTpl( this.templatePath(skillTemplate), skillDir, this.options);
 
-        const scriptTemplate = path.join(techName, 'scripts', process.platform, '**', '*');
+        const scriptTemplate = path.join(techName, 'scripts', langName, process.platform, '**', '*');
+        const scriptCommonTemplate = path.join(techName, 'scripts', 'common', process.platform, '**', '*');
+
         this.log('Creating scripts for', skillName, 'in', skillDir);
-        this.fs.copyTpl( this.templatePath(scriptTemplate), skillDir, this.options);
+
+        // Process common template FIRST, then allow any lang specific scripts to override.
+        this.fs.copyTpl( this.templatePath(scriptCommonTemplate), skillDir, this.options);
+        this.fs.copyTpl( this.templatePath(scriptTemplate), skillDir, this.options, null, { ignoreNoMatch: true });
     }
 };
