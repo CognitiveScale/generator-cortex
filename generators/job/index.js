@@ -16,6 +16,8 @@
 
 'use strict';
 
+const path = require('path');
+
 const technologies = [
     { 'display': 'Function', 'name': 'function' }
 ];
@@ -28,7 +30,7 @@ function displayStrings(table) {
 }
 
 function lookupNameByDisplay(table, lookup) {
-    return table.filter(entry => entry.display == lookup)[0].name
+    return table.filter(entry => entry.display === lookup)[0].name
 }
 
 function trimAndFilterEmptyValues(values) {
@@ -38,14 +40,14 @@ function trimAndFilterEmptyValues(values) {
 const Generator = require('yeoman-generator');
 
 module.exports = class extends Generator {
-    
+
     initializing() {
         if(this.config.get('projectPrefix'))
             this.options.projectPrefix = this.config.get('projectPrefix')+'/';
         else
             this.options.projectPrefix = 'default/';
     }
-    
+
     prompting() {
         return this.prompt([{
             type    : 'input',
@@ -104,9 +106,12 @@ module.exports = class extends Generator {
     writing() {
         const techName = lookupNameByDisplay(technologies, this.options.technology);
         const jobName = this.options.jobName;
-        const jobTemplate = techName + '/' + 'common' + '/**/*';
-        const jobDir = this.destinationPath('jobs/' + jobName);
+        const jobTemplate = path.join(techName,'template','**','*');
+        const jobDir = this.destinationPath(path.join('jobs',jobName));
+        const scriptsTemplate = path.join(techName, 'scripts', process.platform, '**', '*');
+
         this.log('Creating job', jobName, 'in', jobDir);
         this.fs.copyTpl( this.templatePath(jobTemplate), jobDir, this.options);
+        this.fs.copyTpl( this.templatePath(scriptsTemplate), jobDir, this.options);
     }
 };

@@ -22,14 +22,14 @@ const Connections = require("../client/connections");
 const Catalog = require("../client/catalog");
 const Generator = require('yeoman-generator');
 
+const path = require('path');
+
 module.exports = class extends Generator {
 
     constructor(args, opts) {
         super(args, opts);
-        this.connNameTypePair;
-        this.catalogTypes;
     }
-    
+
     initializing() {
         if(this.config.get('projectPrefix'))
             this.options.projectPrefix = this.config.get('projectPrefix')+'/';
@@ -107,8 +107,8 @@ module.exports = class extends Generator {
       writing() {
           // TODO before we create yml check dataset endpoint for name uniqueness.
 
-          const connDetails = 'connectionQuery:\n  - name: query\n    value: --Insert SQL query--\n';
-          this.options.connDetails = connDetails;
+          this.options.connDetails =
+              'connectionQuery:\n  - name: query\n    value: --Insert SQL query--\n';
 
           const connTypes = this.connNameTypePair.find((item) => {
               return item.name === this.options.connectionName;
@@ -123,9 +123,12 @@ module.exports = class extends Generator {
               this.options.connDetails = connDetails + connDetailsMongo;
           }
 
-          const commonPath = 'common/**/*';
-          const connDir = this.destinationPath('dataset/' + this.options.datasetName);
+          const commonPath = path.join('template','**','*');
+          const connDir = this.destinationPath(path.join('dataset', this.options.datasetName));
           this.log('Creating connection', this.options.datasetName, 'in', connDir);
           this.fs.copyTpl( this.templatePath(commonPath), connDir, this.options);
+
+          const scriptsPath = path.join('scripts',process.platform,'**','*');
+          this.fs.copyTpl( this.templatePath(scriptsPath), connDir, this.options);
     }
 };
