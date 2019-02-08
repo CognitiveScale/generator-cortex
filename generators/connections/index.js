@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+const path = require('path');
 
 const connTypes = [
     { 'display': 'MongoDB', 'name': 'mongo' },
@@ -108,11 +109,11 @@ module.exports = class extends Generator {
 
         // TODO before we create yml check conneciton endpoint for name uniqueness.
 
-        const commonPath = 'common/**/*';
-        const connTemplate = templateName + '/**/*';
-        const connDir = this.destinationPath('connections/' + connTypeShort);
+        const scriptPath = path.join('scripts', process.platform, '**','*');
+        const connTemplate = path.join('template', templateName, '**', '*');
+        const connDir = this.destinationPath(path.join('connections', connTypeShort));
         this.log('Creating connection', connTypeShort, 'in', connDir);
-        this.fs.copyTpl( this.templatePath(commonPath), connDir, {});
+        this.fs.copyTpl( this.templatePath(scriptPath), connDir, this.options);
         this.fs.copyTpl( this.templatePath(connTemplate), connDir, this.options);
     }
 };

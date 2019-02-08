@@ -6,4 +6,4 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 ${SCRIPT_DIR}/build-function.sh
 
 # Deploy our function to Cortex
-cortex actions deploy <%= projectPrefix %><%= functionName %> --code "${SCRIPT_DIR}/build/function.zip" --kind python:2
+cortex actions deploy <%= projectPrefix %><%= functionName %> --code "${SCRIPT_DIR}/build/function.zip" --kind <%= deploymentType %>
