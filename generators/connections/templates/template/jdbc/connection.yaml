@@ -2,6 +2,7 @@ name: <%= connName %>
 title: <%= connTitle %>
 description: Update this description
 connectionType: <%= connTypeShort %>
+<%= contentType %>
 allowWrite: true
 params:
   - name: uri
