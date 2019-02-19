@@ -22,8 +22,8 @@ const connTypes = [
     { 'display': 'Postgres SQL', 'name': 'postgresql' },
     { 'display': 'Microsoft SQL Server', 'name': 'mssql' },
     { 'display': 'MySQL', 'name': 'mysql' },
-    { 'display': 'Generic JDBC Connection', 'name': 'generic_jdbc' },
-    { 'display': 'Advanced JDBC Connection', 'name': 'advanced_jdbc' },
+    { 'display': 'Generic JDBC Connection', 'name': 'generic_jdbc', 'contentType' : 'Basic' },
+    { 'display': 'Advanced JDBC Connection', 'name': 'generic_jdbc' , 'contentType': 'Advanced'},
     { 'display': 'Hive', 'name': 'hive' } // Fix me dont have one for hive yet
 ];
 
@@ -39,7 +39,9 @@ function displayStrings(table) {
 function lookupNameByDisplay(table, lookup) {
     return table.filter(entry => entry.display === lookup)[0].name
 }
-
+function lookupContentType(table, lookup) {
+    return table.filter(entry => entry.display === lookup)[0].contentType
+}
 const Generator = require('yeoman-generator');
 
 module.exports = class extends Generator {
@@ -72,7 +74,7 @@ module.exports = class extends Generator {
       },
       {
         when: function (response) {
-            return lookupNameByDisplay(connTypes, response.connType) !== 'advanced_jdbc';
+            return lookupContentType(connTypes, response.connType) !== 'Advanced';
         },
         type    : 'input',
         name    : 'uri',
@@ -80,7 +82,7 @@ module.exports = class extends Generator {
       },
       {
         when: function (response) {
-            return lookupNameByDisplay(connTypes, response.connType) === 'advanced_jdbc';
+            return lookupContentType(connTypes, response.connType) === 'Advanced';
         },
         type    : 'input',
         name    : 'plugin_jar',
@@ -93,6 +95,11 @@ module.exports = class extends Generator {
         this.options.connTitle     = answers.connTitle.trim();
         this.options.uri           = answers.uri;
         this.options.plugin_jar    = answers.plugin_jar;
+        this.options.contentType   = lookupContentType(connTypes, this.options.connType);
+
+        if(this.options.contentType){
+            this.options.contentType = `contentType: ${this.options.contentType}`;
+        }
       });
     }
 
@@ -101,8 +108,9 @@ module.exports = class extends Generator {
 
         let templateName = connTypeShort;
         this.options.connTypeShort = connTypeShort;
-
-        if (isJdbc.includes(connTypeShort)) {
+        if(lookupContentType(connTypes, this.options.connType) === 'Advanced') {
+            templateName = 'advanced_jdbc';
+        } else if (isJdbc.includes(connTypeShort)) {
             this.options.classname = `org.${connTypeShort}.Driver`;
             templateName = 'jdbc';
         }
