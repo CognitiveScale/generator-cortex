@@ -13,7 +13,7 @@ inputs:
     routing:
       all:
         action  : <%= projectPrefix %><%= functionName %>
-        runtime: cortex/functions
+        runtime: cortex/daemons
         output: output1
 
 outputs:

@@ -23,5 +23,5 @@ echo "Building Docker Image from $SCRIPT_DIR/build"
 docker build   -t "$IMAGE_NAME" "$SCRIPT_DIR"
 
 echo "Tagging with $PRIVATE_REGISTRY/$IMAGE_NAME:"$VERSION""
-docker tag $IMAGE_NAME $PRIVATE_REGISTRY/$IMAGE_NAME:"$VERSION"
+docker tag "$IMAGE_NAME $PRIVATE_REGISTRY/$IMAGE_NAME:$VERSION"
 

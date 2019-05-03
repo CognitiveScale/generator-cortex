@@ -10,9 +10,9 @@ cortex docker login --profile <%= profile %>
 echo "Running the build"
 ${SCRIPT_DIR}/build-daemon.sh
 echo "Tagging the image"
-docker tag $IMAGE_NAME $PRIVATE_REGISTRY/$IMAGE_NAME:$VERSION
+docker tag "$IMAGE_NAME $PRIVATE_REGISTRY/$IMAGE_NAME:$VERSION"
 echo "Pushing Repo Changes"
-docker push  $PRIVATE_REGISTRY/$IMAGE_NAME:$VERSION
+docker push  "$PRIVATE_REGISTRY/$IMAGE_NAME:$VERSION"
 
 echo "Deploying Changes to Cortex"
 cortex actions deploy <%= skillName %> \
