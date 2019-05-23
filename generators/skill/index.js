@@ -19,7 +19,8 @@
 const path = require('path');
 
 const technologies = [
-    { 'display': 'Function', 'name': 'function' }
+    { 'display': 'Function', 'name': 'function' },
+    { 'display': 'Daemon', 'name': 'daemon' }
 ];
 
 const languages = [
@@ -38,7 +39,6 @@ function displayStrings(table) {
 function lookupByDisplay(table, lookup) {
     return table.filter(entry => entry.display === lookup)[0];
 }
-
 const Generator = require('yeoman-generator');
 
 module.exports = class extends Generator {
@@ -70,14 +70,28 @@ module.exports = class extends Generator {
             else {
                 return true;
             }
-        }
+            
+        },
+        default : "skill"
       }, {
         type    : 'list',
         name    : 'technology',
         message : 'Backing technology',
         choices : displayStrings(technologies),
         default : 0
-      }, {
+      },{
+        when: 'technology.deamon',
+        type: 'input',
+        name: 'privateRegistry',
+        message: 'Private Docker Registry',
+        default : 'private-registry.cortex.insights.ai'
+      },{
+        type    : 'input',
+        name    : 'profile',
+        message : 'Cortex Profile',
+        choices : displayStrings(languages),
+        default : 'default'
+      },{
         type    : 'list',
         name    : 'language',
         message : 'Implementation language',
@@ -88,6 +102,8 @@ module.exports = class extends Generator {
         this.options.functionName  = answers.skillName;
         this.options.technology    = answers.technology;
         this.options.language      = answers.language;
+        this.options.privateRegistry      = answers.privateRegistry;
+        this.options.profile      = answers.profile;
       });
     }
 
