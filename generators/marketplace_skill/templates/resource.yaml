@@ -1,0 +1,24 @@
+asset:
+  name: <%= projectPrefix %><%= skillName %>
+  description: <%= skillSummary %>
+  title: <%= skillTitle %>
+title: <%= skillTitle %>
+summary: <%= skillSummary %>
+description: Update this description -- <%= skillName %>
+inputParams:
+  routes: {}
+icon: <%= skillIcon %>
+author: <%= skillAuthor %> -- Update author
+price:
+  unit: <%= skillPriceUnit %>
+  value: <%= skillPriceValue %>
+tutorials:
+  - title: Tutorial Title
+    description: Tutorial Description
+    videoLink: http://video.avi
+license:
+    text: CognitiveScale
+    type: Apache
+tags:
+  - value: skill.status.install
+    label: Install
