@@ -1,0 +1,120 @@
+/*
+ * Copyright 2019 Cognitive Scale, Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the “License”);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an “AS IS” BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+'use strict';
+
+const path = require('path');
+
+const Generator = require('yeoman-generator');
+const Joi = require('joi');
+
+function getNameAndNamespace(fullName) {
+    return fullName.split('/');
+}
+
+const AgentSchema = Joi.object().keys({
+    name: Joi.string().required(),
+    title: Joi.string().required()
+}).unknown();
+
+module.exports = class extends Generator {
+
+    initializing() {
+        this.options.projectName   = this.config.get('projectName');
+        if(this.config.get('projectPrefix'))
+            this.options.projectPrefix = this.config.get('projectPrefix')+'/';
+        else
+            this.options.projectPrefix = 'default/';
+    }
+
+    prompting() {
+        // Use non-interactive mode if -i specified
+        if (this.options.i) {
+            return
+        }
+
+        try {
+            // Make sure agentDefinition is object when called from command line
+            this.options.agentDefinition = JSON.parse(this.options.agentDefinition);
+        } catch(e) {
+            // Do nothing
+        }
+
+        const { error, value } = Joi.validate(this.options.agentDefinition, AgentSchema);
+        if (error) {
+            throw new Error(`Invalid agent definition: ${error.details[0].message}`);
+        }
+        [this.options.agentNamespace, this.options.agentName] = getNameAndNamespace(this.options.agentDefinition.name);
+        this.options.agentTitle = this.options.agentDefinition.title;
+
+        this.log(this.options);
+
+        return this.prompt([{
+            type    : 'input',
+            name    : 'agentSummary',
+            message : 'Agent summary: ',
+            default : 'Agent Summary'
+        },{
+            type    : 'input',
+            name    : 'agentAuthor',
+            message : 'Agent author: ',
+            default : 'CognitiveScale'
+        },{
+            type    : 'input',
+            name    : 'agentIcon',
+            message : 'Agent icon: ',
+            default : 'http://example-icon.png'
+        },{
+            type    : 'input',
+            name    : 'agentPriceUnit',
+            message : 'Agent price unit: ',
+            default : 'CCU'
+        },{
+            type    : 'input',
+            name    : 'agentPriceValue',
+            message : 'Agent price value: ',
+            default : '0'
+        }]).then((answers) => {
+            this.options.agentIcon     = answers.agentIcon;
+            this.options.agentAuthor     = answers.agentAuthor;
+            this.options.agentSummary     = answers.agentSummary;
+            this.options.agentPriceUnit     = answers.agentPriceUnit;
+            this.options.agentPriceValue     = answers.agentPriceValue;
+        });
+    }
+
+    writing() {
+        const agentName = this.options.agentName;
+        const agentDir = path.join('agents', agentName);
+
+        const agentDefinitionPath = this.destinationPath(path.join(agentDir, 'resource.yaml'));
+
+        this.log(`Creating resource.yaml for agent ${agentName} in`, agentDir);
+        this.fs.copyTpl(this.templatePath('resource.yaml'), agentDefinitionPath, this.options);
+
+        const buildAgentTemplate = path.join('scripts', process.platform, 'build-agent.sh');
+        const buildAgentPath = this.destinationPath(path.join(agentDir, 'build-agent.sh'));
+
+        this.log(`Creating build script for ${agentName} in`, agentDir);
+        this.fs.copyTpl(this.templatePath(buildAgentTemplate), buildAgentPath, this.options);
+
+        const publishAgentTemplate = path.join('scripts', process.platform, 'publish-agent.sh');
+        const publishAgentPath = this.destinationPath(path.join(agentDir, 'publish-agent.sh'));
+
+        this.log(`Creating publish script for ${agentName} in`, agentDir);
+        this.fs.copyTpl(this.templatePath(publishAgentTemplate), publishAgentPath, this.options);
+    }
+};

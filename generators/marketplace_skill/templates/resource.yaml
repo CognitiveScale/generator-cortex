@@ -1,5 +1,5 @@
 asset:
-  name: <%= projectPrefix %><%= skillName %>
+  name: <%= skillNamespace %>/<%= skillName %>
   description: <%= skillSummary %>
   title: <%= skillTitle %>
 title: <%= skillTitle %>
@@ -8,7 +8,7 @@ description: Update this description -- <%= skillName %>
 inputParams:
   routes: {}
 icon: <%= skillIcon %>
-author: <%= skillAuthor %> -- Update author
+author: <%= skillAuthor %> <% if (skillAuthor === 'CognitiveScale') { %>-- Update author <% } %>
 price:
   unit: <%= skillPriceUnit %>
   value: <%= skillPriceValue %>

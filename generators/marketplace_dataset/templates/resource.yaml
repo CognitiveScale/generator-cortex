@@ -1,0 +1,23 @@
+asset:
+  name: <%= projectPrefix %><%= datasetName %>
+  description: <%= datasetSummary %>
+  title: <%= datasetTitle %>
+title: <%= datasetTitle %>
+summary: <%= datasetSummary %>
+description: Update this description -- <%= datasetName %>
+inputParams: {}
+icon: <%= datasetIcon %>
+author: <%= datasetAuthor %> <% if (datasetAuthor === 'CognitiveScale') { %>-- Update author <% } %>
+price:
+  unit: <%= datasetPriceUnit %>
+  value: <%= datasetPriceValue %>
+tutorials:
+  - title: Tutorial Title
+    description: Tutorial Description
+    videoLink: http://video.avi
+license:
+    text: CognitiveScale
+    type: Apache
+tags:
+  - value: dataset.industry.all
+    label: All

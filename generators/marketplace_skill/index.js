@@ -19,6 +19,17 @@
 const path = require('path');
 
 const Generator = require('yeoman-generator');
+const Joi = require('joi');
+
+function getNameAndNamespace(fullName) {
+    return fullName.split('/');
+}
+
+const SkillSchema = Joi.object().keys({
+    name: Joi.string().required(),
+    title: Joi.string().required(),
+    description: Joi.string().required()
+}).unknown();
 
 module.exports = class extends Generator {
 
@@ -36,75 +47,63 @@ module.exports = class extends Generator {
             return
         }
 
-      return this.prompt([{
-        type    : 'input',
-        name    : 'skillName',
-        message : `Skill name: ${this.options.projectPrefix}`,
-        validate: (input)=> {
-            const regex = new RegExp('([^:.a-zA-Z0-9_-])');
-            const match = input.match(regex);
-            if (match) {
-                return `illegal character: ${match[1]}`;
-            }
-            else {
-                return true;
-            }
-        },
-        default : 'skill'
-      }, {
-        type    : 'input',
-        name    : 'skillTitle',
-        message : 'Skill title: ',
-        default : 'Skill'
-      },{
-        type    : 'input',
-        name    : 'skillSummary',
-        message : 'Skill summary: ',
-        default : 'Skill Summary'
-      },{
-        type    : 'input',
-        name    : 'skillAuthor',
-        message : 'Skill author: ',
-        default : 'CognitiveScale'
-      },{
-        type    : 'input',
-        name    : 'skillIcon',
-        message : 'Skill icon: ',
-        default : 'http://example-icon.png'
-      },{
-        type    : 'input',
-        name    : 'skillPriceUnit',
-        message : 'Skill price unit: ',
-        default : 'CCU'
-      },{
-        type    : 'input',
-        name    : 'skillPriceValue',
-        message : 'Skill price value: ',
-        default : '0'
-      }]).then((answers) => {
-        this.options.skillName     = answers.skillName;
-        this.options.skillTitle     = answers.skillTitle;
-        this.options.skillIcon     = answers.skillIcon;
-        this.options.skillAuthor     = answers.skillAuthor;
-        this.options.skillSummary     = answers.skillSummary;
-        this.options.skillPriceUnit     = answers.skillPriceUnit;
-        this.options.skillPriceValue     = answers.skillPriceValue;
-      });
+        try {
+            // Make sure skillDefinition is object when called from command line
+            this.options.skillDefinition = JSON.parse(this.options.skillDefinition);
+        } catch(e) {
+            // Do nothing
+        }
+
+        const { error, value } = Joi.validate(this.options.skillDefinition, SkillSchema);
+        if (error) {
+            throw new Error(`Invalid skill definition: ${error.details[0].message}`);
+        }
+
+        [this.options.skillNamespace, this.options.skillName] = getNameAndNamespace(this.options.skillDefinition.name);
+        this.options.skillTitle = this.options.skillDefinition.title;
+        this.options.skillSummary = this.options.skillDefinition.description;
+
+        return this.prompt([{
+            type    : 'input',
+            name    : 'skillAuthor',
+            message : 'Skill author: ',
+            default : 'CognitiveScale'
+        },{
+            type    : 'input',
+            name    : 'skillIcon',
+            message : 'Skill icon: ',
+            default : 'http://example-icon.png'
+        },{
+            type    : 'input',
+            name    : 'skillPriceUnit',
+            message : 'Skill price unit: ',
+            default : 'CCU'
+        },{
+            type    : 'input',
+            name    : 'skillPriceValue',
+            message : 'Skill price value: ',
+            default : '0'
+        }]).then((answers) => {
+            this.options.skillIcon     = answers.skillIcon;
+            this.options.skillAuthor     = answers.skillAuthor;
+            this.options.skillPriceUnit     = answers.skillPriceUnit;
+            this.options.skillPriceValue     = answers.skillPriceValue;
+        });
     }
 
     writing() {
         const skillName = this.options.skillName;
         const skillDir = path.join('skills', skillName);
 
-        const skillDefinitionDir = this.destinationPath(path.join(skillDir, 'resource.yaml'));
+        const skillDefinitionPath = this.destinationPath(path.join(skillDir, 'resource.yaml'));
 
         this.log(`Creating resource.yaml for skill ${skillName} in`, skillDir);
-        this.fs.copyTpl(this.templatePath('resource.yaml'), skillDefinitionDir, this.options);
+        this.fs.copyTpl(this.templatePath('resource.yaml'), skillDefinitionPath, this.options);
 
-        const scriptTemplate = path.join('scripts', process.platform, 'build-skill.sh');
-        const skillScriptDir = this.destinationPath(path.join(skillDir, 'build-skill.sh'));
+        const skillScriptTemplate = path.join('scripts', process.platform, '**', '*');
+        const skillScriptPath = this.destinationPath(path.join(skillDir));
 
         this.log(`Creating scripts for ${skillName} in`, skillDir);
-        this.fs.copyTpl(this.templatePath(scriptTemplate), skillScriptDir, this.options);
+        this.fs.copyTpl(this.templatePath(skillScriptTemplate), skillScriptPath, this.options);
     }
 };

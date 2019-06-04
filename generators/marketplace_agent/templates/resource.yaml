@@ -1,0 +1,23 @@
+asset:
+  name: <%= agentNamespace %>/<%= agentName %>
+  description: <%= agentSummary %>
+  title: <%= agentTitle %>
+title: <%= agentTitle %>
+summary: <%= agentSummary %>
+description: Update this description -- <%= agentName %>
+inputParams: {}
+icon: <%= agentIcon %>
+author: <%= agentAuthor %> <% if (agentAuthor === 'CognitiveScale') { %>-- Update author <% } %>
+price:
+  unit: <%= agentPriceUnit %>
+  value: <%= agentPriceValue %>
+tutorials:
+  - title: Tutorial Title
+    description: Tutorial Description
+    videoLink: http://video.avi
+license:
+    text: CognitiveScale
+    type: Apache
+tags:
+  - value: agent.industry.developer
+    label: Developer

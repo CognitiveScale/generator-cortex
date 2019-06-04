@@ -1,0 +1,23 @@
+asset:
+  name: <%= projectPrefix %><%= connectionName %>
+  description: <%= connectionSummary %>
+  title: <%= connectionTitle %>
+title: <%= connectionTitle %>
+summary: <%= connectionSummary %>
+description: Update this description -- <%= connectionName %>
+inputParams: {}
+icon: <%= connectionIcon %>
+author: <%= connectionAuthor %> <% if (connectionAuthor === 'CognitiveScale') { %>-- Update author <% } %>
+price:
+  unit: <%= connectionPriceUnit %>
+  value: <%= connectionPriceValue %>
+tutorials:
+  - title: Tutorial Title
+    description: Tutorial Description
+    videoLink: http://video.avi
+license:
+    text: CognitiveScale
+    type: Apache
+tags:
+  - value: connection.industry.all
+    label: All
