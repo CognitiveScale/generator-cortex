@@ -60,8 +60,6 @@ module.exports = class extends Generator {
         [this.options.agentNamespace, this.options.agentName] = getNameAndNamespace(this.options.agentDefinition.name);
         this.options.agentTitle = this.options.agentDefinition.title;
 
-        this.log(this.options);
-
         return this.prompt([{
             type    : 'input',
             name    : 'agentSummary',
@@ -105,16 +103,10 @@ module.exports = class extends Generator {
         this.log(`Creating resource.yaml for agent ${agentName} in`, agentDir);
         this.fs.copyTpl(this.templatePath('resource.yaml'), agentDefinitionPath, this.options);
 
-        const buildAgentTemplate = path.join('scripts', process.platform, 'build-agent.sh');
-        const buildAgentPath = this.destinationPath(path.join(agentDir, 'build-agent.sh'));
+        const agentScriptTemplate = path.join('scripts', process.platform, '**', '*');
+        const agentScriptPath = this.destinationPath(path.join(agentDir));
 
-        this.log(`Creating build script for ${agentName} in`, agentDir);
-        this.fs.copyTpl(this.templatePath(buildAgentTemplate), buildAgentPath, this.options);
-
-        const publishAgentTemplate = path.join('scripts', process.platform, 'publish-agent.sh');
-        const publishAgentPath = this.destinationPath(path.join(agentDir, 'publish-agent.sh'));
-
-        this.log(`Creating publish script for ${agentName} in`, agentDir);
-        this.fs.copyTpl(this.templatePath(publishAgentTemplate), publishAgentPath, this.options);
+        this.log(`Creating scripts for ${agentName} in`, agentDir);
+        this.fs.copyTpl(this.templatePath(agentScriptTemplate), agentScriptPath, this.options);
     }
 };

@@ -22,6 +22,7 @@ const Generator = require('yeoman-generator');
 const Joi = require('joi');
 
 const ConnectionSchema = Joi.object().keys({
+    connectionType: Joi.string().required(),
     name: Joi.string().required(),
     title: Joi.string().required(),
     description: Joi.string().required()
@@ -59,6 +60,7 @@ module.exports = class extends Generator {
         this.options.connectionName = this.options.connectionDefinition.name;
         this.options.connectionTitle = this.options.connectionDefinition.title;
         this.options.connectionSummary = this.options.connectionDefinition.description;
+        this.options.connectionType = this.options.connectionDefinition.connectionType;
         
         return this.prompt([{
             type    : 'input',
@@ -89,24 +91,18 @@ module.exports = class extends Generator {
     }
 
     writing() {
-        const connectionName = this.options.connectionName;
-        const connectionDir = path.join('connections', connectionName);
+        const connectionType = this.options.connectionType;
+        const connectionDir = path.join('connections', connectionType);
 
         const connectionDefinitionPath = this.destinationPath(path.join(connectionDir, 'resource.yaml'));
 
-        this.log(`Creating resource.yaml for connection ${connectionName} in`, connectionDir);
+        this.log(`Creating resource.yaml for connection type ${connectionType} in`, connectionDir);
         this.fs.copyTpl(this.templatePath('resource.yaml'), connectionDefinitionPath, this.options);
 
-        const buildConnectionTemplate = path.join('scripts', process.platform, 'build-connection.sh');
-        const buildConnectionPath = this.destinationPath(path.join(connectionDir, 'build-connection.sh'));
+        const connectionScriptTemplate = path.join('scripts', process.platform, '**', '*');
+        const connectionScriptPath = this.destinationPath(path.join(connectionDir));
 
-        this.log(`Creating build script for ${connectionName} in`, connectionDir);
-        this.fs.copyTpl(this.templatePath(buildConnectionTemplate), buildConnectionPath, this.options);
-
-        const publishConnectionTemplate = path.join('scripts', process.platform, 'publish-connection.sh');
-        const publishConnectionPath = this.destinationPath(path.join(connectionDir, 'publish-connection.sh'));
-
-        this.log(`Creating publish script for ${connectionName} in`, connectionDir);
-        this.fs.copyTpl(this.templatePath(publishConnectionTemplate), publishConnectionPath, this.options);
+        this.log(`Creating scripts for ${connectionType} in`, connectionDir);
+        this.fs.copyTpl(this.templatePath(connectionScriptTemplate), connectionScriptPath, this.options);
     }
 };
