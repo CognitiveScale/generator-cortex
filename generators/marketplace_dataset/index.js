@@ -91,10 +91,13 @@ module.exports = class extends Generator {
         const datasetName = this.options.datasetName;
         const datasetDir = path.join('dataset', datasetName);
 
-        const datasetDefinitionPath = this.destinationPath(path.join(datasetDir, 'resource.yaml'));
-
+        const resourceYamlPath = this.destinationPath(path.join(datasetDir, 'resource.yaml'));
         this.log(`Creating resource.yaml for dataset ${datasetName} in`, datasetDir);
-        this.fs.copyTpl(this.templatePath('resource.yaml'), datasetDefinitionPath, this.options);
+        this.fs.copyTpl(this.templatePath('resource.yaml'), resourceYamlPath, this.options);
+
+        const datasetDescriptionPath = this.destinationPath(path.join(datasetDir, 'description.md'));
+        this.log(`Creating description.md for dataset ${datasetName} in`, datasetDir);
+        this.fs.copyTpl(this.templatePath('description.md'), datasetDescriptionPath, this.options);
 
         const datasetScriptTemplate = path.join('scripts', process.platform, '**', '*');
         const datasetScriptPath = this.destinationPath(path.join(datasetDir));

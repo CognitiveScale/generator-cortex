@@ -1,11 +1,5 @@
-asset:
-  name: <%= projectPrefix %><%= connectionName %>
-  description: <%= connectionSummary %>
-  title: <%= connectionTitle %>
 title: <%= connectionTitle %>
 summary: <%= connectionSummary %>
-description: Update this description -- <%= connectionName %>
-inputParams: {}
 icon: <%= connectionIcon %>
 author: <%= connectionAuthor %> <% if (connectionAuthor === 'CognitiveScale') { %>-- Update author <% } %>
 price:
@@ -19,5 +13,5 @@ license:
     text: CognitiveScale
     type: Apache
 tags:
-  - value: connection.industry.all
-    label: All
+  - value: --insertTagKey--
+    label: -- Insert user friendly label --

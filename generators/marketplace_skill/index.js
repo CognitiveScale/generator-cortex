@@ -95,10 +95,13 @@ module.exports = class extends Generator {
         const skillName = this.options.skillName;
         const skillDir = path.join('skills', skillName);
 
-        const skillDefinitionPath = this.destinationPath(path.join(skillDir, 'resource.yaml'));
-
+        const resourceYamlPath = this.destinationPath(path.join(skillDir, 'resource.yaml'));
         this.log(`Creating resource.yaml for skill ${skillName} in`, skillDir);
-        this.fs.copyTpl(this.templatePath('resource.yaml'), skillDefinitionPath, this.options);
+        this.fs.copyTpl(this.templatePath('resource.yaml'), resourceYamlPath, this.options);
+
+        const skillDescriptionPath = this.destinationPath(path.join(skillDir, 'description.md'));
+        this.log(`Creating description.md for skill ${skillName} in`, skillDir);
+        this.fs.copyTpl(this.templatePath('description.md'), skillDescriptionPath, this.options);
 
         const skillScriptTemplate = path.join('scripts', process.platform, '**', '*');
         const skillScriptPath = this.destinationPath(path.join(skillDir));

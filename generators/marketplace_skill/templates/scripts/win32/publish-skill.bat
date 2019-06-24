@@ -8,6 +8,6 @@ SET BUILD_FILE=%BUILD_DIR%\skill.zip
 call %SCRIPT_DIR%\build-skill.bat
 
 echo Publishing skill to Cortex Marketplace...
-cortex marketplace skills save --yaml "%RESOURCE_YAML_FILE%" --zip "%BUILD_FILE%"
+cortex marketplace skills save <%= projectPrefix %><%= skillName %> --yaml "%RESOURCE_YAML_FILE%" --zip "%BUILD_FILE%"
 echo Complete!
 

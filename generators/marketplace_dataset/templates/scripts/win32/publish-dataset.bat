@@ -8,6 +8,6 @@ SET BUILD_FILE=%BUILD_DIR%\dataset.zip
 call %SCRIPT_DIR%\build-dataset.bat
 
 echo Publishing dataset to Cortex Marketplace...
-cortex marketplace datasets save --yaml "%RESOURCE_YAML_FILE%" --zip "%BUILD_FILE%"
+cortex marketplace datasets save <%= projectPrefix %><%= datasetName %> --yaml "%RESOURCE_YAML_FILE%" --zip "%BUILD_FILE%"
 echo Complete!
 

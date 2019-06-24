@@ -98,10 +98,13 @@ module.exports = class extends Generator {
         const agentName = this.options.agentName;
         const agentDir = path.join('agents', agentName);
 
-        const agentDefinitionPath = this.destinationPath(path.join(agentDir, 'resource.yaml'));
-
+        const resourceYamlPath = this.destinationPath(path.join(agentDir, 'resource.yaml'));
         this.log(`Creating resource.yaml for agent ${agentName} in`, agentDir);
-        this.fs.copyTpl(this.templatePath('resource.yaml'), agentDefinitionPath, this.options);
+        this.fs.copyTpl(this.templatePath('resource.yaml'), resourceYamlPath, this.options);
+
+        const agentDescriptionPath = this.destinationPath(path.join(agentDir, 'description.md'));
+        this.log(`Creating description.md for agent ${agentName} in`, agentDir);
+        this.fs.copyTpl(this.templatePath('description.md'), agentDescriptionPath, this.options);
 
         const agentScriptTemplate = path.join('scripts', process.platform, '**', '*');
         const agentScriptPath = this.destinationPath(path.join(agentDir));

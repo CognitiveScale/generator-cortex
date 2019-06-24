@@ -94,10 +94,14 @@ module.exports = class extends Generator {
         const connectionType = this.options.connectionType;
         const connectionDir = path.join('connections', connectionType);
 
-        const connectionDefinitionPath = this.destinationPath(path.join(connectionDir, 'resource.yaml'));
+        const resourceYamlPath = this.destinationPath(path.join(connectionDir, 'resource.yaml'));
 
         this.log(`Creating resource.yaml for connection type ${connectionType} in`, connectionDir);
-        this.fs.copyTpl(this.templatePath('resource.yaml'), connectionDefinitionPath, this.options);
+        this.fs.copyTpl(this.templatePath('resource.yaml'), resourceYamlPath, this.options);
+
+        const connectionDescriptionPath = this.destinationPath(path.join(connectionDir, 'description.md'));
+        this.log(`Creating description.md for connection type ${connectionType} in`, connectionDir);
+        this.fs.copyTpl(this.templatePath('description.md'), connectionDescriptionPath, this.options);
 
         const connectionScriptTemplate = path.join('scripts', process.platform, '**', '*');
         const connectionScriptPath = this.destinationPath(path.join(connectionDir));

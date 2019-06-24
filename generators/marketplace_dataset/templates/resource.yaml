@@ -1,11 +1,5 @@
-asset:
-  name: <%= projectPrefix %><%= datasetName %>
-  description: <%= datasetSummary %>
-  title: <%= datasetTitle %>
 title: <%= datasetTitle %>
 summary: <%= datasetSummary %>
-description: Update this description -- <%= datasetName %>
-inputParams: {}
 icon: <%= datasetIcon %>
 author: <%= datasetAuthor %> <% if (datasetAuthor === 'CognitiveScale') { %>-- Update author <% } %>
 price:
@@ -19,5 +13,5 @@ license:
     text: CognitiveScale
     type: Apache
 tags:
-  - value: dataset.industry.all
-    label: All
+  - value: --insertTagKey--
+    label: -- Insert user friendly label --

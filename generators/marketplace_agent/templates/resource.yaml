@@ -1,11 +1,5 @@
-asset:
-  name: <%= agentNamespace %>/<%= agentName %>
-  description: <%= agentSummary %>
-  title: <%= agentTitle %>
 title: <%= agentTitle %>
 summary: <%= agentSummary %>
-description: Update this description -- <%= agentName %>
-inputParams: {}
 icon: <%= agentIcon %>
 author: <%= agentAuthor %> <% if (agentAuthor === 'CognitiveScale') { %>-- Update author <% } %>
 price:
@@ -19,5 +13,5 @@ license:
     text: CognitiveScale
     type: Apache
 tags:
-  - value: agent.industry.developer
-    label: Developer
+  - value: --insertTagKey--
+    label: -- Insert user friendly label --
