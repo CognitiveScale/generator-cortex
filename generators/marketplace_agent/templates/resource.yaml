@@ -1,7 +1,6 @@
-title: <%= agentTitle %>
 summary: <%= agentSummary %>
 icon: <%= agentIcon %>
-author: <%= agentAuthor %> <% if (agentAuthor === 'CognitiveScale') { %>-- Update author <% } %>
+author: <%= agentAuthor %>
 price:
   unit: <%= agentPriceUnit %>
   value: <%= agentPriceValue %>

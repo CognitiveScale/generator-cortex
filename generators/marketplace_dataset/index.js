@@ -21,10 +21,9 @@ const path = require('path');
 const Generator = require('yeoman-generator');
 const Joi = require('joi');
 
+
 const DatasetSchema = Joi.object().keys({
-    name: Joi.string().required(),
-    title: Joi.string().required(),
-    description: Joi.string().required()
+    name: Joi.string().required()
 }).unknown();
 
 module.exports = class extends Generator {
@@ -44,7 +43,7 @@ module.exports = class extends Generator {
         }
 
         try {
-            // Make sure datasetDefinition is object when called from command line
+            // Make sure datasetDefinition is object when called from command line in non-interactive mode
             this.options.datasetDefinition = JSON.parse(this.options.datasetDefinition);
         } catch(e) {
             // Do nothing
@@ -56,7 +55,6 @@ module.exports = class extends Generator {
         }
         
         this.options.datasetName = this.options.datasetDefinition.name;
-        this.options.datasetTitle = this.options.datasetDefinition.title;
         this.options.datasetSummary = this.options.datasetDefinition.description;
 
         return this.prompt([{
@@ -81,7 +79,11 @@ module.exports = class extends Generator {
             default : '0'
         }]).then((answers) => {
             this.options.datasetIcon     = answers.datasetIcon;
-            this.options.datasetAuthor     = answers.datasetAuthor;
+            const datasetAuthor = answers.datasetAuthor;
+            this.options.datasetAuthor     = datasetAuthor;
+            if (datasetAuthor === 'CognitiveScale') {
+                this.options.datasetAuthor += ' -- Update author';
+            }
             this.options.datasetPriceUnit     = answers.datasetPriceUnit;
             this.options.datasetPriceValue     = answers.datasetPriceValue;
         });

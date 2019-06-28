@@ -21,13 +21,11 @@ const path = require('path');
 const Generator = require('yeoman-generator');
 const Joi = require('joi');
 
+
 const ConnectionSchema = Joi.object().keys({
     connectionType: Joi.string().required(),
-    name: Joi.string().required(),
-    title: Joi.string().required(),
-    description: Joi.string().required()
+    name: Joi.string().required()
 }).unknown();
-
 
 module.exports = class extends Generator {
 
@@ -46,7 +44,7 @@ module.exports = class extends Generator {
         }
 
         try {
-            // Make sure connectionDefinition is object when called from command line
+            // Make sure connectionDefinition is object when called from command line in non-interactive mode
             this.options.connectionDefinition = JSON.parse(this.options.connectionDefinition);
         } catch(e) {
             // Do nothing
@@ -58,7 +56,6 @@ module.exports = class extends Generator {
         }
 
         this.options.connectionName = this.options.connectionDefinition.name;
-        this.options.connectionTitle = this.options.connectionDefinition.title;
         this.options.connectionSummary = this.options.connectionDefinition.description;
         this.options.connectionType = this.options.connectionDefinition.connectionType;
         
@@ -84,7 +81,11 @@ module.exports = class extends Generator {
             default : '0'
         }]).then((answers) => {
             this.options.connectionIcon     = answers.connectionIcon;
-            this.options.connectionAuthor     = answers.connectionAuthor;
+            const connectionAuthor = answers.connectionAuthor;
+            this.options.connectionAuthor     = connectionAuthor;
+            if (connectionAuthor === 'CognitiveScale') {
+                this.options.connectionAuthor += ' -- Update author';
+            }
             this.options.connectionPriceUnit     = answers.connectionPriceUnit;
             this.options.connectionPriceValue     = answers.connectionPriceValue;
         });
@@ -98,10 +99,6 @@ module.exports = class extends Generator {
 
         this.log(`Creating resource.yaml for connection type ${connectionType} in`, connectionDir);
         this.fs.copyTpl(this.templatePath('resource.yaml'), resourceYamlPath, this.options);
-
-        const connectionDescriptionPath = this.destinationPath(path.join(connectionDir, 'description.md'));
-        this.log(`Creating description.md for connection type ${connectionType} in`, connectionDir);
-        this.fs.copyTpl(this.templatePath('description.md'), connectionDescriptionPath, this.options);
 
         const connectionScriptTemplate = path.join('scripts', process.platform, '**', '*');
         const connectionScriptPath = this.destinationPath(path.join(connectionDir));

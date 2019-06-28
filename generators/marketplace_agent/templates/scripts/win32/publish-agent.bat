@@ -8,6 +8,6 @@ SET BUILD_FILE=%BUILD_DIR%\agent.zip
 call %SCRIPT_DIR%\build-agent.bat
 
 echo Publishing agent to Cortex Marketplace...
-cortex marketplace agents save <%= agentNamespace %>/<%= agentName %> --yaml "%RESOURCE_YAML_FILE%" --zip "%BUILD_FILE%"
+cortex marketplace agents save "%BUILD_FILE%"
 echo Complete!
 

@@ -26,8 +26,7 @@ function getNameAndNamespace(fullName) {
 }
 
 const AgentSchema = Joi.object().keys({
-    name: Joi.string().required(),
-    title: Joi.string().required()
+    name: Joi.string().required()
 }).unknown();
 
 module.exports = class extends Generator {
@@ -47,7 +46,7 @@ module.exports = class extends Generator {
         }
 
         try {
-            // Make sure agentDefinition is object when called from command line
+            // Make sure agentDefinition is object when called from command line in non-interactive mode
             this.options.agentDefinition = JSON.parse(this.options.agentDefinition);
         } catch(e) {
             // Do nothing
@@ -57,7 +56,7 @@ module.exports = class extends Generator {
         if (error) {
             throw new Error(`Invalid agent definition: ${error.details[0].message}`);
         }
-        [this.options.agentNamespace, this.options.agentName] = getNameAndNamespace(this.options.agentDefinition.name);
+        this.options.agentName = this.options.agentDefinition.name;
         this.options.agentTitle = this.options.agentDefinition.title;
 
         return this.prompt([{
@@ -87,7 +86,11 @@ module.exports = class extends Generator {
             default : '0'
         }]).then((answers) => {
             this.options.agentIcon     = answers.agentIcon;
-            this.options.agentAuthor     = answers.agentAuthor;
+            const agentAuthor = answers.agentAuthor;
+            this.options.agentAuthor     = agentAuthor;
+            if (agentAuthor === 'CognitiveScale') {
+                this.options.agentAuthor += ' -- Update author';
+            }
             this.options.agentSummary     = answers.agentSummary;
             this.options.agentPriceUnit     = answers.agentPriceUnit;
             this.options.agentPriceValue     = answers.agentPriceValue;
@@ -95,7 +98,7 @@ module.exports = class extends Generator {
     }
 
     writing() {
-        const agentName = this.options.agentName;
+        const [, agentName] = getNameAndNamespace(this.options.agentName);
         const agentDir = path.join('agents', agentName);
 
         const resourceYamlPath = this.destinationPath(path.join(agentDir, 'resource.yaml'));

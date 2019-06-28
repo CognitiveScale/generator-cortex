@@ -1,7 +1,6 @@
-title: <%= datasetTitle %>
 summary: <%= datasetSummary %>
 icon: <%= datasetIcon %>
-author: <%= datasetAuthor %> <% if (datasetAuthor === 'CognitiveScale') { %>-- Update author <% } %>
+author: <%= datasetAuthor %>
 price:
   unit: <%= datasetPriceUnit %>
   value: <%= datasetPriceValue %>

@@ -1,7 +1,6 @@
-title: <%= connectionTitle %>
 summary: <%= connectionSummary %>
 icon: <%= connectionIcon %>
-author: <%= connectionAuthor %> <% if (connectionAuthor === 'CognitiveScale') { %>-- Update author <% } %>
+author: <%= connectionAuthor %>
 price:
   unit: <%= connectionPriceUnit %>
   value: <%= connectionPriceValue %>

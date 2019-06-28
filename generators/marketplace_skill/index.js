@@ -21,13 +21,13 @@ const path = require('path');
 const Generator = require('yeoman-generator');
 const Joi = require('joi');
 
+
 function getNameAndNamespace(fullName) {
     return fullName.split('/');
 }
 
 const SkillSchema = Joi.object().keys({
     name: Joi.string().required(),
-    title: Joi.string().required(),
     description: Joi.string().required()
 }).unknown();
 
@@ -48,7 +48,7 @@ module.exports = class extends Generator {
         }
 
         try {
-            // Make sure skillDefinition is object when called from command line
+            // Make sure skillDefinition is object when called from command line in non-interactive mode
             this.options.skillDefinition = JSON.parse(this.options.skillDefinition);
         } catch(e) {
             // Do nothing
@@ -59,8 +59,7 @@ module.exports = class extends Generator {
             throw new Error(`Invalid skill definition: ${error.details[0].message}`);
         }
 
-        [this.options.skillNamespace, this.options.skillName] = getNameAndNamespace(this.options.skillDefinition.name);
-        this.options.skillTitle = this.options.skillDefinition.title;
+        this.options.skillName = this.options.skillDefinition.name;
         this.options.skillSummary = this.options.skillDefinition.description;
 
         return this.prompt([{
@@ -85,14 +84,18 @@ module.exports = class extends Generator {
             default : '0'
         }]).then((answers) => {
             this.options.skillIcon     = answers.skillIcon;
-            this.options.skillAuthor     = answers.skillAuthor;
+            const skillAuthor = answers.skillAuthor;
+            this.options.skillAuthor     = skillAuthor;
+            if (skillAuthor === 'CognitiveScale') {
+                this.options.skillAuthor += ' -- Update author';
+            }
             this.options.skillPriceUnit     = answers.skillPriceUnit;
             this.options.skillPriceValue     = answers.skillPriceValue;
         });
     }
 
     writing() {
-        const skillName = this.options.skillName;
+        const [, skillName] = getNameAndNamespace(this.options.skillName);
         const skillDir = path.join('skills', skillName);
 
         const resourceYamlPath = this.destinationPath(path.join(skillDir, 'resource.yaml'));

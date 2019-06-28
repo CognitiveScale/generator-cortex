@@ -8,6 +8,6 @@ SET BUILD_FILE=%BUILD_DIR%\connection.zip
 call %SCRIPT_DIR%\build-connection.bat
 
 echo Publishing connection to Cortex Marketplace...
-cortex marketplace connections save <%= projectPrefix %><%= connectionName %> --yaml "%RESOURCE_YAML_FILE%" --zip "%BUILD_FILE%"
+cortex marketplace connections save "%BUILD_FILE%"
 echo Complete!
 

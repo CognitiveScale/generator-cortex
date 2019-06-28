@@ -11,12 +11,11 @@ devConfig:
        port: ''
        environment: ''
        environmentVariables: ''
-title: <%= skillTitle %>
 summary: <%= skillSummary %>
 inputParams:
   routes: {}
 icon: <%= skillIcon %>
-author: <%= skillAuthor %> <% if (skillAuthor === 'CognitiveScale') { %>-- Update author <% } %>
+author: <%= skillAuthor %>
 price:
   unit: <%= skillPriceUnit %>
   value: <%= skillPriceValue %>
