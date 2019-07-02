@@ -46,10 +46,11 @@ module.exports = class extends Generator {
         }
 
         try {
-            // Make sure agentDefinition is object when called from command line in non-interactive mode
+            // Make sure agentDefinition is object when called from command line
             this.options.agentDefinition = JSON.parse(this.options.agentDefinition);
         } catch(e) {
-            // Do nothing
+            // Do nothing as we don't want to show error for cortex cli generator,
+            // Because from cortex cli we get agentDefinition as an object
         }
 
         const { error, value } = Joi.validate(this.options.agentDefinition, AgentSchema);

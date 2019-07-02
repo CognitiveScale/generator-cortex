@@ -27,8 +27,7 @@ function getNameAndNamespace(fullName) {
 }
 
 const SkillSchema = Joi.object().keys({
-    name: Joi.string().required(),
-    description: Joi.string().required()
+    name: Joi.string().required()
 }).unknown();
 
 module.exports = class extends Generator {
@@ -48,10 +47,11 @@ module.exports = class extends Generator {
         }
 
         try {
-            // Make sure skillDefinition is object when called from command line in non-interactive mode
+            // Make sure skillDefinition is object when called from command line
             this.options.skillDefinition = JSON.parse(this.options.skillDefinition);
         } catch(e) {
-            // Do nothing
+            // Do nothing as we don't want to show error for cortex cli generator,
+            // Because from cortex cli we get skillDefinition as an object
         }
 
         const { error, value } = Joi.validate(this.options.skillDefinition, SkillSchema);

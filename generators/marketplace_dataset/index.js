@@ -43,10 +43,11 @@ module.exports = class extends Generator {
         }
 
         try {
-            // Make sure datasetDefinition is object when called from command line in non-interactive mode
+            // Make sure datasetDefinition is object when called from command line
             this.options.datasetDefinition = JSON.parse(this.options.datasetDefinition);
         } catch(e) {
-            // Do nothing
+            // Do nothing as we don't want to show error for cortex cli generator,
+            // Because from cortex cli we get datasetDefinition as an object
         }
 
         const { error, value } = Joi.validate(this.options.datasetDefinition, DatasetSchema);

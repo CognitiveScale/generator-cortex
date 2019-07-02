@@ -47,7 +47,8 @@ module.exports = class extends Generator {
             // Make sure connectionDefinition is object when called from command line in non-interactive mode
             this.options.connectionDefinition = JSON.parse(this.options.connectionDefinition);
         } catch(e) {
-            // Do nothing
+            // Do nothing as we don't want to show error for cortex cli generator,
+            // Because from cortex cli we get connectionDefinition as an object
         }
 
         const { error, value } = Joi.validate(this.options.connectionDefinition, ConnectionSchema);
