@@ -87,7 +87,18 @@ module.exports = class extends Generator {
         type    : 'input',
         name    : 'plugin_jar',
         message : 'Plugin Jar Managed Content Key'
-      }]).then((answers) => {
+      },
+      {
+        type    : 'input',
+        name    : 'connAuthor',
+        message : 'Connection author: ',
+        default : 'CognitiveScale'
+      },{
+        type    : 'input',
+        name    : 'connIcon',
+        message : 'Connection icon: ',
+        default : 'http://example-icon.png'
+        }]).then((answers) => {
         this.options.projectName   = this.config.get('projectName');
         this.options.projectPrefix = this.config.get('projectPrefix');
         this.options.connType      = answers.connType;
@@ -100,6 +111,8 @@ module.exports = class extends Generator {
         if(this.options.contentType){
             this.options.contentType = `contentType: ${this.options.contentType}`;
         }
+        this.options.connAuthor    = answers.connAuthor;
+        this.options.connIcon    = answers.connIcon;
       });
     }
 
@@ -123,5 +136,8 @@ module.exports = class extends Generator {
         this.log('Creating connection', connTypeShort, 'in', connDir);
         this.fs.copyTpl( this.templatePath(scriptPath), connDir, this.options);
         this.fs.copyTpl( this.templatePath(connTemplate), connDir, this.options);
+
+        const commonTemplate = path.join('template', 'common', '**', '*');
+        this.fs.copyTpl( this.templatePath(commonTemplate), connDir, this.options);
     }
 };
