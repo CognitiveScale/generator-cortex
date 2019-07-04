@@ -1,0 +1,31 @@
+devConfig:
+  actions:
+     - name: <%= projectPrefix %><%= functionName %>
+       actionType: daemon
+       kind: <%= deploymentType %>
+       docker: <%= privateRegistry %>/<%= projectPrefix %><%= functionName %>:1.0.0-SNAPSHOT
+       code: ''
+       memory: ''
+       vcpus: ''
+       cmd: '<%- command %>'
+       port: <%= port %>
+       environment: ''
+       environmentVariables: ''
+summary: Update this summary -- <%= projectName %> <%= skillName %>
+inputParams:
+  routes: {}
+icon: <%= skillIcon %>
+author: <%= skillAuthor %>
+price:
+  unit: CCU
+  value: '0'
+tutorials:
+  - title: Tutorial Title
+    description: Tutorial Description
+    videoLink: http://video.avi
+license:
+    text: CognitiveScale
+    type: Apache
+tags:
+  - value: --insertTagKey--
+    label: -- Insert user friendly label --
