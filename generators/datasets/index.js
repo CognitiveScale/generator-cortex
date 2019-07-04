@@ -91,6 +91,16 @@ module.exports = class extends Generator {
                   name    : 'typeName',
                   message : 'Type Name',
                   choices : this.catalogTypes.sort()
+                },{
+                  type    : 'input',
+                  name    : 'datasetAuthor',
+                  message : 'Dataset author: ',
+                  default : 'CognitiveScale'
+                },{
+                  type    : 'input',
+                  name    : 'datasetIcon',
+                  message : 'Dataset icon: ',
+                  default : 'http://example-icon.png'
                 }]).then((answers) => {
                   this.options.projectName    = this.config.get('projectName');
                   this.options.projectPrefix  = this.config.get('projectPrefix');
@@ -99,6 +109,8 @@ module.exports = class extends Generator {
                   this.options.description    = answers.description.trim();
                   this.options.connectionName = answers.connectionName;
                   this.options.typeName       = answers.typeName;
+                  this.options.datasetIcon    = answers.datasetIcon;
+                  this.options.datasetAuthor  = answers.datasetAuthor;
                 });
 
         });
