@@ -24,9 +24,9 @@ const technologies = [
 ];
 
 const languages = [
-    { 'display': 'Python 3', 'name': 'python3', 'deploymentType': 'python:3' },
-    { 'display': 'Python 2', 'name': 'python2', 'deploymentType': 'python:2'  },
-    { 'display': 'Node 8', 'name': 'node8', 'deploymentType': 'nodejs:8'  }
+    { 'display': 'Python 3', 'name': 'python3', 'deploymentType': 'python:3', 'command': '[ "python3", "__main__.py" ]', 'port': 5000 },
+    { 'display': 'Python 2', 'name': 'python2', 'deploymentType': 'python:2', 'command': '[ "python2", "__main__.py" ]', 'port': 5000  },
+    { 'display': 'Node 8', 'name': 'node8', 'deploymentType': 'nodejs:8', 'command': '[ "node", "index.js" ]', 'port': 5000  }
 ];
 
 function displayStrings(table) {
@@ -97,13 +97,25 @@ module.exports = class extends Generator {
         message : 'Implementation language',
         choices : displayStrings(languages),
         default : 0
-      }]).then((answers) => {
+      },{
+            type    : 'input',
+            name    : 'skillAuthor',
+            message : 'Skill author: ',
+            default : 'CognitiveScale'
+        },{
+            type    : 'input',
+            name    : 'skillIcon',
+            message : 'Skill icon: ',
+            default : 'http://example-icon.png'
+        }]).then((answers) => {
         this.options.skillName     = answers.skillName;
         this.options.functionName  = answers.skillName;
         this.options.technology    = answers.technology;
         this.options.language      = answers.language;
         this.options.privateRegistry      = answers.privateRegistry;
         this.options.profile      = answers.profile;
+        this.options.skillAuthor      = answers.skillAuthor;
+        this.options.skillIcon      = answers.skillIcon;
       });
     }
 
@@ -112,6 +124,8 @@ module.exports = class extends Generator {
         const langName = lookupByDisplay(languages,    this.options.language).name;
 
         this.options.deploymentType = lookupByDisplay(languages, this.options.language).deploymentType;
+        this.options.command = lookupByDisplay(languages, this.options.language).command;
+        this.options.port = lookupByDisplay(languages, this.options.language).port;
 
         const funcName = this.options.functionName;
         const funcTemplate = path.join(techName,'template', langName, '**', '*');
