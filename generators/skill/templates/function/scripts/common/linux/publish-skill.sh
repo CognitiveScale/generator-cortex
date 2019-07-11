@@ -10,3 +10,6 @@ ${SCRIPT_DIR}/build-skill.sh
 
 # Publish skill to Cortex Marketplace
 cortex marketplace skills save "${SCRIPT_DIR}/build/skill.zip"
+
+# Delete zip
+rm -rf "${SCRIPT_DIR}/build/skill.zip"
