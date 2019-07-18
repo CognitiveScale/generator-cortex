@@ -9,4 +9,4 @@ if not exist %BUILD_DIR%/nul mkdir "%BUILD_DIR%"
 
 echo Creating build in %BUILD_DIR%...
 powershell %SCRIPT_DIR%/buildzip.ps1 %SOURCE_DIR% %BUILD_FILE%
-echo Created function.zip in %BUILD_DIR%
+echo Created connection.zip in %BUILD_DIR%
