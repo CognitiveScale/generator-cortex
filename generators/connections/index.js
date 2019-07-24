@@ -107,7 +107,6 @@ module.exports = class extends Generator {
             this.options.contentType = `contentType: ${this.options.contentType}`;
         }
         this.options.connAuthor    = answers.connAuthor;
-        this.options.connIcon    = answers.connIcon;
       });
     }
 
