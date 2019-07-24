@@ -96,11 +96,6 @@ module.exports = class extends Generator {
                   name    : 'datasetAuthor',
                   message : 'Dataset author: ',
                   default : 'CognitiveScale'
-                },{
-                  type    : 'input',
-                  name    : 'datasetIcon',
-                  message : 'Dataset icon: ',
-                  default : 'http://example-icon.png'
                 }]).then((answers) => {
                   this.options.projectName    = this.config.get('projectName');
                   this.options.projectPrefix  = this.config.get('projectPrefix');
