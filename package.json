@@ -1,6 +1,6 @@
 {
   "name": "@c12e/generator-cortex",
-  "version": "0.3.20",
+  "version": "0.3.22",
   "description": "Generates a development project for Cortex constructs like actions and skills",
   "license": "Apache-2.0",
   "private": false,
@@ -31,11 +31,13 @@
     "yeoman-generator": "^3.1.1"
   },
   "devDependencies": {
+    "audit-ci": "1.6.0",
     "mocha": "^5.0.0",
     "yeoman-assert": "^3.1.0",
     "yeoman-test": "^2.0.0"
   },
   "scripts": {
+    "pretest": "audit-ci -m",
     "test": "mocha --reporter spec --bail --check-leaks test/"
   }
 }
