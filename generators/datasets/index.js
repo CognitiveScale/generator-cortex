@@ -104,7 +104,6 @@ module.exports = class extends Generator {
                   this.options.description    = answers.description.trim();
                   this.options.connectionName = answers.connectionName;
                   this.options.typeName       = answers.typeName;
-                  this.options.datasetIcon    = answers.datasetIcon;
                   this.options.datasetAuthor  = answers.datasetAuthor;
                 });
 

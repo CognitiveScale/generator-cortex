@@ -70,9 +70,7 @@ module.exports = class extends Generator {
             else {
                 return true;
             }
-
-        },
-        default : "skill"
+        }
       }, {
         type    : 'list',
         name    : 'technology',
@@ -95,9 +93,7 @@ module.exports = class extends Generator {
         this.options.functionName  = answers.skillName;
         this.options.technology    = answers.technology;
         this.options.language      = answers.language;
-        this.options.privateRegistry      = answers.privateRegistry;
-        this.options.profile      = answers.profile;
-        this.options.skillAuthor      = answers.skillAuthor;
+        this.options.skillAuthor   = answers.skillAuthor;
       });
     }
 
@@ -106,8 +102,6 @@ module.exports = class extends Generator {
         const langName = lookupByDisplay(languages,    this.options.language).name;
 
         this.options.deploymentType = lookupByDisplay(languages, this.options.language).deploymentType;
-        this.options.command = lookupByDisplay(languages, this.options.language).command;
-        this.options.port = lookupByDisplay(languages, this.options.language).port;
 
         const funcName = this.options.functionName;
         const funcTemplate = path.join(techName,'template', langName, '**', '*');
