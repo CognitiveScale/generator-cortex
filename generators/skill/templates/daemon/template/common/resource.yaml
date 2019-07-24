@@ -14,7 +14,7 @@ devConfig:
 summary: Update this summary -- <%= projectName %> <%= skillName %>
 inputParams:
   routes: {}
-icon: <%= skillIcon %>
+icon: http://example-icon.png
 author: <%= skillAuthor %>
 price:
   unit: CCU

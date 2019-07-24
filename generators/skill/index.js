@@ -19,14 +19,13 @@
 const path = require('path');
 
 const technologies = [
-    { 'display': 'Function', 'name': 'function' },
-    { 'display': 'Daemon', 'name': 'daemon' }
+    { 'display': 'Function', 'name': 'function' }
 ];
 
 const languages = [
-    { 'display': 'Python 3', 'name': 'python3', 'deploymentType': 'python:3', 'command': '[ "python3", "__main__.py" ]', 'port': 5000 },
-    { 'display': 'Python 2', 'name': 'python2', 'deploymentType': 'python:2', 'command': '[ "python2", "__main__.py" ]', 'port': 5000  },
-    { 'display': 'Node 8', 'name': 'node8', 'deploymentType': 'nodejs:8', 'command': '[ "node", "index.js" ]', 'port': 5000  }
+    { 'display': 'Python 3', 'name': 'python3', 'deploymentType': 'python:3' },
+    { 'display': 'Python 2', 'name': 'python2', 'deploymentType': 'python:2'  },
+    { 'display': 'Node 8', 'name': 'node8', 'deploymentType': 'nodejs:8'  }
 ];
 
 function displayStrings(table) {
@@ -39,6 +38,7 @@ function displayStrings(table) {
 function lookupByDisplay(table, lookup) {
     return table.filter(entry => entry.display === lookup)[0];
 }
+
 const Generator = require('yeoman-generator');
 
 module.exports = class extends Generator {
@@ -70,7 +70,7 @@ module.exports = class extends Generator {
             else {
                 return true;
             }
-            
+
         },
         default : "skill"
       }, {
@@ -79,35 +79,18 @@ module.exports = class extends Generator {
         message : 'Backing technology',
         choices : displayStrings(technologies),
         default : 0
-      },{
-        when: 'technology.deamon',
-        type: 'input',
-        name: 'privateRegistry',
-        message: 'Private Docker Registry',
-        default : 'private-registry.cortex.insights.ai'
-      },{
-        type    : 'input',
-        name    : 'profile',
-        message : 'Cortex Profile',
-        choices : displayStrings(languages),
-        default : 'default'
-      },{
+      }, {
         type    : 'list',
         name    : 'language',
         message : 'Implementation language',
         choices : displayStrings(languages),
         default : 0
       },{
-            type    : 'input',
-            name    : 'skillAuthor',
-            message : 'Skill author: ',
-            default : 'CognitiveScale'
-        },{
-            type    : 'input',
-            name    : 'skillIcon',
-            message : 'Skill icon: ',
-            default : 'http://example-icon.png'
-        }]).then((answers) => {
+          type    : 'input',
+          name    : 'skillAuthor',
+          message : 'Skill author: ',
+          default : 'CognitiveScale'
+      }]).then((answers) => {
         this.options.skillName     = answers.skillName;
         this.options.functionName  = answers.skillName;
         this.options.technology    = answers.technology;
@@ -115,7 +98,6 @@ module.exports = class extends Generator {
         this.options.privateRegistry      = answers.privateRegistry;
         this.options.profile      = answers.profile;
         this.options.skillAuthor      = answers.skillAuthor;
-        this.options.skillIcon      = answers.skillIcon;
       });
     }
 

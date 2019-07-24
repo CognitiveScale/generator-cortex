@@ -1,5 +1,5 @@
 summary: Update this summary
-icon: <%= connIcon %>
+icon: http://example-icon.png
 author: <%= connAuthor %>
 price:
   unit: CCU

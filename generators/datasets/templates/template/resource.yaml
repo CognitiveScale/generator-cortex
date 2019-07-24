@@ -1,5 +1,5 @@
 summary: Update this summary -- <%= projectName %> <%= datasetName %>
-icon: <%= datasetIcon %>
+icon: http://example-icon.png
 author: <%= datasetAuthor %>
 price:
   unit: CCU
