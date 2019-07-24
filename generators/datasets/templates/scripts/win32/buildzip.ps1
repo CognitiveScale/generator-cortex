@@ -28,4 +28,3 @@ class FixedEncoder : System.Text.UTF8Encoding {
 echo "Building zip $dstFile"
 
 [System.IO.Compression.ZipFile]::CreateFromDirectory($srcFolder, $dstFile, [System.IO.Compression.CompressionLevel]::Optimal, $false, [FixedEncoder]::new())
-
