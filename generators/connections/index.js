@@ -93,12 +93,7 @@ module.exports = class extends Generator {
         name    : 'connAuthor',
         message : 'Connection author: ',
         default : 'CognitiveScale'
-      },{
-        type    : 'input',
-        name    : 'connIcon',
-        message : 'Connection icon: ',
-        default : 'http://example-icon.png'
-        }]).then((answers) => {
+      }]).then((answers) => {
         this.options.projectName   = this.config.get('projectName');
         this.options.projectPrefix = this.config.get('projectPrefix');
         this.options.connType      = answers.connType;
