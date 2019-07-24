@@ -83,11 +83,17 @@ module.exports = class extends Generator {
         message : 'Implementation language',
         choices : displayStrings(languages),
         default : 0
+      },{
+          type    : 'input',
+          name    : 'skillAuthor',
+          message : 'Skill author: ',
+          default : 'CognitiveScale'
       }]).then((answers) => {
         this.options.skillName     = answers.skillName;
         this.options.functionName  = answers.skillName;
         this.options.technology    = answers.technology;
         this.options.language      = answers.language;
+        this.options.skillAuthor   = answers.skillAuthor;
       });
     }
 

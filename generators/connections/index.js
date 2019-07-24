@@ -87,6 +87,12 @@ module.exports = class extends Generator {
         type    : 'input',
         name    : 'plugin_jar',
         message : 'Plugin Jar Managed Content Key'
+      },
+      {
+        type    : 'input',
+        name    : 'connAuthor',
+        message : 'Connection author: ',
+        default : 'CognitiveScale'
       }]).then((answers) => {
         this.options.projectName   = this.config.get('projectName');
         this.options.projectPrefix = this.config.get('projectPrefix');
@@ -100,6 +106,7 @@ module.exports = class extends Generator {
         if(this.options.contentType){
             this.options.contentType = `contentType: ${this.options.contentType}`;
         }
+        this.options.connAuthor    = answers.connAuthor;
       });
     }
 
@@ -123,5 +130,8 @@ module.exports = class extends Generator {
         this.log('Creating connection', connTypeShort, 'in', connDir);
         this.fs.copyTpl( this.templatePath(scriptPath), connDir, this.options);
         this.fs.copyTpl( this.templatePath(connTemplate), connDir, this.options);
+
+        const commonTemplate = path.join('template', 'common', '**', '*');
+        this.fs.copyTpl( this.templatePath(commonTemplate), connDir, this.options);
     }
 };

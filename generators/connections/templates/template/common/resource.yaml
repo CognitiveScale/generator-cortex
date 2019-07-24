@@ -1,0 +1,16 @@
+summary: Update this summary
+icon: http://example-icon.png
+author: <%= connAuthor %>
+price:
+  unit: CCU
+  value: '0'
+tutorials:
+  - title: Tutorial Title
+    description: Tutorial Description
+    videoLink: http://video.avi
+license:
+    text: CognitiveScale
+    type: Apache
+tags:
+  - value: --insertTagKey--
+    label: -- Insert user friendly label --
