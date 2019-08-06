@@ -1,1 +1,1 @@
-cortex-client
+cortex-python
