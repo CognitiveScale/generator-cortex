@@ -1,1 +1,2 @@
-cortex-python
+cortex-client
+# Use 'cortex-python' instead of 'cortex-client' if you want to use the newer SDK.
