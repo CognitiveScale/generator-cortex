@@ -1,7 +1,7 @@
-from cortex_client import InputMessage, OutputMessage
-
+from cortex import Message, Cortex
 
 def main(params):
-    msg = InputMessage.from_params(params)
+    msg = Message(params)
     text = msg.payload.get('text')
-    return OutputMessage.create().with_payload({'text': 'Got: ' + text}).to_params()
+    cortex = Cortex.client(api_endpoint=msg.apiEndpoint, token=msg.token)
+    return cortex.message({'text': 'Got %s!' % text}).to_params()
