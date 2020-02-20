@@ -1,6 +1,6 @@
 {
   "name": "@c12e/generator-cortex",
-  "version": "0.3.25",
+  "version": "0.3.30",
   "description": "Generates a development project for Cortex constructs like actions and skills",
   "license": "Apache-2.0",
   "private": false,
