@@ -69,7 +69,7 @@ class Profile {
     }
 
     validate() {
-        const {error, value} = Joi.validate(this, ProfileSchema);
+        const {error, value} = ProfileSchema.validate(this);
         if (error) {
             throw new Error(`Invalid configuration profile <${this.name}>: ${error.details[0].message}.  Please run "cortex configure".`);
         }
@@ -80,12 +80,6 @@ class Profile {
         return {url: this.url, username: this.username, account: this.account, token: this.token};
     }
 }
-
-const ConfigSchema = Joi.object().keys({
-    version: Joi.string().optional().default('1'),
-    profiles: Joi.object().optional(),
-    currentProfile: Joi.string().optional().default('default')
-});
 
 class Config {
 
