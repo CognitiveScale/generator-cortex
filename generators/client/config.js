@@ -17,7 +17,7 @@
 const os = require('os');
 const fs = require('fs');
 const path = require('path');
-const Joi = require('joi');
+const Joi = require('@hapi/joi');
 const debug = require('debug')('cortex:config');
 
 module.exports.defaultConfig = defaultConfig = function(){
