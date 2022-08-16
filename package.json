@@ -28,7 +28,7 @@
     "debug": "^4.1.1",
     "@hapi/joi": "^17.1.0",
     "superagent": "^5.2.2",
-    "yeoman-generator": "^4.5.0"
+    "yeoman-generator": "^4.13.0"
   },
   "devDependencies": {
     "audit-ci": "2.5.1",
